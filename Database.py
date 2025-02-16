@@ -11,6 +11,8 @@ mycursor = connection.cursor()
 Q1 = "CREATE TABLE Recipes (RecipeID int PRIMARY KEY AUTO_INCREMENT, Recipename VARCHAR(100), Instructions VARCHAR(7000), Dietaries VARCHAR(7000),  Links VARCHAR(7000))"#Creates the Recipe table
 Q2 = "INSERT INTO Recipes (Recipename, Instructions, Dietaries, Links) VALUES (%s, %s, %s, %s)"#Query for inserting data in to database
 
+Q3 = "CREATE TABLE Accounts (AcountID int PRIMARY KEY AUTO_INCREMENT, Email VARCHAR(100), Username VARCHAR(100), Password VARCHAR(7000))"#Creates Accounts table
+
 Recipedata = [("FOOD", "Cook", "Veg" ,"href blah blah")]#list of Recipe data
 
 for x, Recipe in enumerate(Recipedata):#goes through each item in the recpie list and adds it to the databse
