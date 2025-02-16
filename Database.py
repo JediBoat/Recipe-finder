@@ -8,8 +8,8 @@ connection = mysql.connector.connect(host='sql8.freesqldatabase.com',
 
 mycursor = connection.cursor()
 
-Q1 = "CREATE TABLE Cards (RecipeID int PRIMARY KEY AUTO_INCREMENT, Recipename VARCHAR(100), Instructions VARCHAR(7000), Dietaries VARCHAR(7000),  Links VARCHAR(7000))"#Creates the Recipe table
-Q2 = "INSERT INTO Cards (Recipename, Instructions, Dietaries, Links) VALUES (%s, %s, %s, %s)"#Query for inserting data in to database
+Q1 = "CREATE TABLE Recipes (RecipeID int PRIMARY KEY AUTO_INCREMENT, Recipename VARCHAR(100), Instructions VARCHAR(7000), Dietaries VARCHAR(7000),  Links VARCHAR(7000))"#Creates the Recipe table
+Q2 = "INSERT INTO Recipes (Recipename, Instructions, Dietaries, Links) VALUES (%s, %s, %s, %s)"#Query for inserting data in to database
 
 Recipedata = [("FOOD", "Cook", "Veg" ,"href blah blah")]#list of Recipe data
 
