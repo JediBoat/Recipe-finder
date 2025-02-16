@@ -8,10 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     try 
     {
-        require_once("dbapi.inc.php");//links file
+        require_once("dbapi.inc.php");//links file connects to the database
 
         //need to write code to get the user account id
-        
+
         $query = "UPDATE Accounts SET username = username, pwd = :pwd, email = :email WHERE acountID = ;"; //Query for updating tabels
 
         $statement = $conn->prepare($query);

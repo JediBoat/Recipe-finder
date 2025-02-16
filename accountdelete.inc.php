@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     try 
     {
-        require_once("dbapi.inc.php");//links file
+        require_once("dbapi.inc.php");//links file connects to the database
 
         $query = "DELETE FROM username = :username AND pwd = :pwd;";//deletes user
 

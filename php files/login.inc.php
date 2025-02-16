@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     try 
     {
-        require_once("dbapi.inc.php");//links file
+        require_once("dbapi.inc.php");//links file connects to the database
 
         $query = "INSERT INTO Accounts (username, pwd, email) VALUES (?, ?, ?);"; //Query for inserting data user details into accounts table
 
