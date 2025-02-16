@@ -10,7 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         require_once("dbapi.inc.php");//links file
 
-        $query = "INSERT INTO Accounts (username, pwd, email) VALUES (?, ?, ?);"; //Query for inserting data user details into accounts table
+        //need to write code to get the user account id
+        
+        $query = "UPDATE Accounts SET username = username, pwd = :pwd, email = :email WHERE acountID = ;"; //Query for updating tabels
 
         $statement = $conn->prepare($query);
         $statement->execute([$username, $pwd, $email]);//submit data from user
@@ -20,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
         die();
         //header("");makes sure the user logins into there own page
-        // You need to wait for html before adding more 
     } 
     catch (PDOException $e) 
     {
