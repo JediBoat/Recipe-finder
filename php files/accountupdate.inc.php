@@ -5,6 +5,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $username = $_POST["username"];//replace with form variable
     $pwd = $_POST["password"];//replace with form variable
     $email = $_POST["email"];//replace with form variable 
+    $firstname = $_POST["username"];//replace with form variable
+    $secondname = $_POST["password"];//replace with form variable
+    $age = $_POST["email"];//replace with form variable 
 
     try 
     {
@@ -12,10 +15,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
         //need to write code to get the user account id
 
-        $query = "UPDATE Accounts SET username = :username, pwd = :pwd, email = :email WHERE acountID = ;"; //Query for updating tabels
+        $query = "UPDATE Accounts SET username = :username, pwd = :pwd, email = :email, firstname = :firstname, secondname = :secondname WHERE acountID = ;"; //Query for updating tabels
 
         $statement = $conn->prepare($query);
-        $statement->execute([$username, $pwd, $email]);//submit data from user
+        $statement->execute([$username, $pwd, $email, $firstname, $secondname]);//submit data from user
 
         $conn = null;//closing of connection to database
         $statement = null;
