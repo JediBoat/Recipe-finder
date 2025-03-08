@@ -25,8 +25,6 @@ try
         $statement = null;
 
         die();
-        //header("");makes sure the user logins into there own page
-        // // You need to wait for html before adding more 
     } 
     catch (PDOException $e) 
     {
