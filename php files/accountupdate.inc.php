@@ -4,7 +4,7 @@ try
     require_once("dbapi.inc.php");//links file connects to the database
 
     $json_data = file_get_contents("accountupdate.json");
-    $updateaccounts = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+    $updateaccounts = json_decode($json_data, JSON_OBJECT_AS_ARRAY);//retries json file data turn it into a string an place it in an array
 
     $query = "UPDATE Accounts SET username = :username, pwd = :pwd, email = :email, firstname = :firstname, secondname = :secondname WHERE acountID = ;"; //Query for updating tabels
 
