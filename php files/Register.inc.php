@@ -1,19 +1,24 @@
 <?php
 
-if ($_SERVER["REQUEST_METHOD"] == "POST")
-{
-    $username = $_POST["username"];//replace with form variable
-    $pwd = $_POST["password"];//replace with form variable
-    $email = $_POST["email"];//replace with form variable 
-    $firstname = $_POST["username"];//replace with form variable
-    $secondname = $_POST["password"];//replace with form variable
-    $age = $_POST["email"];//replace with form variable 
-
     try 
     {
         require_once("dbapi.inc.php");//links file connects to the database
 
+        $json_data = file_get_contents("registeraccount.json");
+        $registeraccounts = json_decode($json_data, JSON_OBJECT_AS_ARRAY);//retries json file data turn it into a string an place it in an array
+
         $query = "INSERT INTO Accounts (username, pwd, email, firstname, secondname, age) VALUES (?, ?, ? , ?, ?, ?);"; //Query for inserting data user details into accounts table
+
+        foreach($registeraccounts as $registeraccount)//goes through the json file retrieved
+        {
+            $username = $registeraccount["username"];//sorts data from json file to appropriate variables
+            $pwd = $registeraccount["pwd"];
+            $email = $registeraccount["email"]; 
+            $firstname = $registeraccount["firstname"];
+            $secondname = $registeraccount["secondname"];
+            $age = $registeraccount["age"];
+        }
+
 
         $statement = $conn->prepare($query);
         $statement->execute([$username, $pwd, $email, $firstname, $secondname, $age]);//submit data from user
@@ -29,8 +34,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         die("Failed". $e->getMessage());//it it fails it just terminates the script
     }
-}
-else 
-{
-    //header("");makes sure the user enter the right detals properly or sends them back to the login page
-}
+
