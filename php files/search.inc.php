@@ -44,6 +44,7 @@ else
         echo htmlspecialchars($result["recipename"]);//retrieves results 
         echo htmlspecialchars($result["instructions"]);//need wait for html then adjust it
         echo htmlspecialchars($result["dietaries"]);
+        echo htmlspecialchars($result["ingredients"]);
         echo htmlspecialchars($result["links"]);
     }
 }
