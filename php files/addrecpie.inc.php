@@ -11,11 +11,11 @@ try
 
         foreach($userrecipes as $userrecipe)//goes through the json file retrieved
         {
-            $recipename = $userrecipe["recipename"];
-            $instructions = $userrecipe["instructions"];//stores trhem into variabiles
-            $ingredients= $userrecipe["ingredients"];
-            $dietaries = $userrecipe["dietaries"];
-            $links = $userrecipe["links"];
+            $recipename = $userrecipe["recipeName"];
+            $instructions = $userrecipe["recipeMethod"];//stores trhem into variabiles
+            $ingredients= $userrecipe["recipeIngredients”"];
+            $dietaries = $userrecipe["recipeDietaries"];
+            $links = $userrecipe["recipeLinks"];
         }
 
         $statement = $conn->prepare($query);

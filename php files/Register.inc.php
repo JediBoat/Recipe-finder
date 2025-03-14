@@ -16,7 +16,7 @@
             $email = $registeraccount["email"]; 
             $firstname = $registeraccount["firstname"];
             $secondname = $registeraccount["secondname"];
-            $age = $registeraccount["age"];
+            $age = $registeraccount["age"];//may need to convert to integer but cant test result yet
         }
 
 
