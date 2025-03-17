@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+m<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,43 +7,67 @@
     <title>Dishcovery - Home</title>
 </head>
 <body>
-    <div class="header"> 
-        <div class="menu-bar">
-            <ul>
-                <li></li>
-            </ul>
-        </div>
+    <div class="header"> <!-- Header and container of top half of the website -->
+
         <div class="logo">Dishcovery</div>
-        <div class="settings"><button class="settings-btn"></button></div>
-    </div>
-    <div class="container">
-        <div class="searchbar-container">
+        <div class="menu-bar"> <!-- Menu bar for responsive and standard layout -->
+            <ul>
+                <li> Home </li>
+                <li> Sign Up/Login </li>
+            </ul>
+        </div>
+        <div class="searchbar-container"> <!-- Search bar container and classes unsure what else may be needed for the future -->
+            <p>Search Recipes:</p>
             <div class="search-bar"></div>
-            <button class="search-btn"></button>
+                <button class="search-btn"></button>
         </div>
-        <div class="filter">
-            <ul class="filter-container">
-                <li class="filter-section"><button class="add-filter-btn"></button></li>
+    </div>
+
+    <div class="container"> <!-- Container of bottom half of website -->
+
+        <div class="ingrd_and_fltr-container">  <!-- Ingredient and filters container and classes --> 
+            <div class="ingrd-container"> <!-- Ingredients cointainer and classes -->
+                <ul class="ingrd-list-container">
+                   <li class="ingrd-item">
+                        <button class="add-ingrd-btn"></button>
+                        <button class="remove-ingrd-btn"></button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="fltr-container"> <!-- Filters container and classes -->
+
+                <ul class="fltr-list-container">
+                    <li class="fltr-item">
+                        <button class="add-fltr-btn"></button>
+                        <button class="remove-fltr-btn"></button>
+                    </li>
+                </ul>
+            </div>    
+        </div>
+
+        <div class="recipes-container"> <!-- Recipes container and classes -->
+
+            <ul class="recipe-list-container">
+                <li class="recipe-section">
+                    <button class="add-recipe-btn"></button>
+                </li>
             </ul>
         </div>
-        <div class="ingredients-list">
-            <ul class="ingrd-list-container">
-                <li class="ingrd-section"><button class="add-ingrd-btn"></button></li>
-            </ul>
-        </div>
-        <div class="current-ingredients">
-            <ul class="curr-ingrd-container">
-                <li class="curr-ingrd-section"><button class="remove-ingrd-btn"></button></li>
-            </ul>
-        </div>
-        <div class="current-filters">
+
+        <!-- <div class="current-filters">
             <ul class="curr-filters">
-                <li class="curr-filters-section"><button class="remove-filter-btn"></button></li>
-            </ul>
-        </div>
+                <li class="curr-filters-section">
+                    <button class="remove-filter-btn"></button>
+                </li>
+            </ul> 
+        </div> UNSURE IF THIS IS NEEDED YET -->
+
     </div>
-    <div class="footer">
+        
+    <!-- <div class="footer">
         <div class="random-recipe"></div>
-    </div>
+    </div> POTENTIAL ADDITION UNCLEAR IMPLEMENTATION -->
+
 </body>
 </html>
