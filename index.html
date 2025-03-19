@@ -7,21 +7,26 @@ m<!DOCTYPE html>
     <title>Dishcovery - Home</title>
 </head>
 <body>
-    <div class="header"> <!-- Header and container of top half of the website -->
+    <header> <!-- Header and container of top half of the website -->
 
         <div class="logo">Dishcovery</div>
-        <div class="menu-bar"> <!-- Menu bar for responsive and standard layout -->
+
+        <div class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
             <ul>
-                <li> Home </li>
-                <li> Sign Up/Login </li>
+                <li><a href="index.html"> Home </a></li>
+                <li><a href="html/loginpage.html"> Sign Up/Login </a></li>
             </ul>
         </div>
-        <div class="searchbar-container"> <!-- Search bar container and classes unsure what else may be needed for the future -->
-            <p>Search Recipes:</p>
-            <div class="search-bar"></div>
-                <button class="search-btn"></button>
-        </div>
-    </div>
+
+        <div class="searchbar-container"> <!-- Search bar container and classes unsure what else may be needed for the future functionality but ive added what I think is necessary-->
+            <div class="search-bar">
+                <form class="search-form">
+                    <p class="search-title">Search Recipes:</p>
+                    <input type="text" id="recipe" name="recipe" class="search-input-field" placeholder="Search Recipes.." required>
+                    <button type="submit" class="search-btn"></button>
+                </form>
+            </div>
+    </header>
 
     <div class="container"> <!-- Container of bottom half of website -->
 
@@ -29,25 +34,23 @@ m<!DOCTYPE html>
             <div class="ingrd-container"> <!-- Ingredients cointainer and classes -->
                 <ul class="ingrd-list-container">
                    <li class="ingrd-item">
-                        <button class="add-ingrd-btn"></button>
-                        <button class="remove-ingrd-btn"></button>
+                        <button class="add-ingrd-btn"></button> <!-- Add and remove buttons -->
+                        <button class="sub-ingrd-btn"></button>
                     </li>
                 </ul>
             </div>
 
             <div class="fltr-container"> <!-- Filters container and classes -->
-
                 <ul class="fltr-list-container">
                     <li class="fltr-item">
                         <button class="add-fltr-btn"></button>
-                        <button class="remove-fltr-btn"></button>
+                        <button class="sub-fltr-btn"></button>
                     </li>
                 </ul>
             </div>    
         </div>
 
         <div class="recipes-container"> <!-- Recipes container and classes -->
-
             <ul class="recipe-list-container">
                 <li class="recipe-section">
                     <button class="add-recipe-btn"></button>
@@ -65,9 +68,9 @@ m<!DOCTYPE html>
 
     </div>
         
-    <!-- <div class="footer">
-        <div class="random-recipe"></div>
-    </div> POTENTIAL ADDITION UNCLEAR IMPLEMENTATION -->
+    <div class="footer">
+    <!-- <div class="random-recipe"></div> POTENTIAL ADDITION UNCLEAR FOR IMPLEMENTATION -->
+    </div>  
 
 </body>
 </html>

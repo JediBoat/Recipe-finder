@@ -3,9 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dishcovery - Account</title>
+    <link rel="stylesheet" href=""> <!-- Unsure if we will be using the same stylesheet or another for each seperate page -->
+    <title>Dishcovery - My Account</title>
 </head>
 <body>
-    
+
+    <header>
+
+        <div class="logo">Dishcovery</div>
+
+        <div class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
+            <ul>
+                <li><a href="index.html"> Home </a></li>
+                <li><a href="signinpage.html"> Logout </a></li>
+            </ul>
+        </div>
+
+        <div class="searchbar-container"> <!-- Search bar container and classes unsure what else may be needed for the future functionality but ive added what I think is necessary-->
+            <div class="search-bar">
+                <form class="search-form">
+                    <p class="search-title">Search Recipes:</p>
+                    <input type="text" id="recipe" name="recipe" class="search-input-field" placeholder="Search Recipes.." required>
+                    <button type="submit" class="search-btn"></button>
+                </form>
+            </div>
+
+    </header>
+
+    <div class="container">
+        
+        <form class="account-form"> <!-- Account page is currently just a display of the users name/email for now until its more clear for what is needed -->
+            <input type="text" name="email" placeholder="Email">
+            <button type="submit"><a href="signinpage.html"> Logout </a></button>
+        </form>
+
+    </div>
+
+    <div class="footer">
+        
+    </div>
 </body>
 </html>
