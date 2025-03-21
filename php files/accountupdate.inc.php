@@ -17,7 +17,7 @@ try
         $secondname = $accountupdating["secondname"];
     }
 
-    $statement = $conn->prepare($query);
+    $statement = $pdo->prepare($query);
     $statement->execute([$username, $pwd, $email, $firstname, $secondname]);//submit data from user
 
     $conn = null;//closing of connection to database

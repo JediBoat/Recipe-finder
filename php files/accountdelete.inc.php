@@ -15,7 +15,7 @@
             $pwd = $deleteaccount["pwd"];
         }
 
-        $statement = $conn->prepare($query);
+        $statement = $pdo->prepare($query);
         $statement->execute([$username, $pwd]);//submit data from user
 
         $conn = null;//closing of connection to database

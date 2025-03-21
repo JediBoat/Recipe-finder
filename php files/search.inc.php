@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
         $query = "SELECT * FROM Recipes WHERE recipename = :recipesearch";// selects all the data that matches 
 
-        $statement = $conn->prepare($query);
+        $statement = $pdo->prepare($query);
         $statement->execute([$recpie]);//submit data from user
 
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
