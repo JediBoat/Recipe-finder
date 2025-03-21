@@ -21,7 +21,7 @@ try
         $statement = $pdo->prepare($query);
         $statement->execute([$recipename, $instructions, $ingredients, $dietaries, $links]);//submit data from user
 
-        $conn = null;//closing of connection to database
+        $pdo = null;//closing of connection to database
         $statement = null;
 
         die();
