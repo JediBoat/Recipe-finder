@@ -1,8 +1,8 @@
 <?php
 
 $dsn = "mysql:host=sql8.freesqldatabase.com; dbname=;";
-$dbusername = "";//Login details for the database
-$dbpass = "";
+$dbusername = "sql8768869";//Login details for the database
+$dbpass = "jICFgdSB17";
 
 try//error handling in case the database is down
 {
