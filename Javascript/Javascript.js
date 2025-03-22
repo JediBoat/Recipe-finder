@@ -20,8 +20,8 @@ var mysql = require('mysql'); // insert mysql link
 var con = mysql.createConnection({  
 
 	host : 'sql8.freesqldatabase.com', 
-	user: '', 
-	password : '' 
+	user: 'sql8768869', 
+	password : 'jICFgdSB17' 
 
 }); 
 

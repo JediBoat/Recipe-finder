@@ -15,10 +15,12 @@
             $pwd = $deleteaccount["pwd"];
         }
 
-        $statement = $conn->prepare($query);
-        $statement->execute([$username, $pwd]);//submit data from user
+        $statement = $pdo->prepare($query);
+        
+        $statement->bindParam(":username", $username);
+        $statement->bindParam(":pwd", $pwd);
 
-        $conn = null;//closing of connection to database
+        $pdo = null;//closing of connection to database
         $statement = null;
 
         die();

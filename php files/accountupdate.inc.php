@@ -6,7 +6,7 @@ try
     $json_data = file_get_contents("accountupdate.json");
     $updateaccounts = json_decode($json_data, JSON_OBJECT_AS_ARRAY);//retries json file data turn it into a string an place it in an array
 
-    $query = "UPDATE Accounts SET username = :username, pwd = :pwd, email = :email, firstname = :firstname, secondname = :secondname WHERE acountID = ;"; //Query for updating tabels
+    $query = "UPDATE Accounts SET username = :username, pwd = :pwd, email = :email, firstname = :firstname, secondname = :secondname WHERE acountID = 1;"; //Query for updating tabels
 
     foreach($updateaccounts as $updateaccount)//goes through the json file retrieved
     {
@@ -17,10 +17,21 @@ try
         $secondname = $accountupdating["secondname"];
     }
 
-    $statement = $conn->prepare($query);
-    $statement->execute([$username, $pwd, $email, $firstname, $secondname]);//submit data from user
+    $statement = $pdo->prepare($query);
 
-    $conn = null;//closing of connection to database
+    $statement->bindParam(":username", $username);
+    $statement->bindParam(":pwd", $pwd);
+    $statement->bindParam(":email", $email);
+    $statement->bindParam(":firstname", $firstnamee);
+    $statement->bindParam(":secondname", $secondname);
+ 
+    
+    
+
+
+    $statement->execute();//submit data from user
+
+    $pdo= null;//closing of connection to database
     $statement = null;
 
     die();

@@ -1,22 +1,29 @@
 <?php
 
-if ($_SERVER["REQUEST_METHOD"] == "POST")
-{
-    $recpie = $_POST["recipesearch"];//replace with form variable
+// if ($_SERVER["REQUEST_METHOD"] == "POST")
+// {
+     //$recpie = $_POST["recipesearch"];//replace with form variable
     
 
     try 
     {
+        $recpie = "Gluten-free Pizza";
         require_once("dbapi.inc.php");//links file connects to the database
 
-        $query = "SELECT * FROM Recipes WHERE recipename = :recipesearch";// selects all the data that matches 
+        $query = "SELECT * FROM Recipes WHERE recipename = '$recpie';";// selects all the data that matches 
 
-        $statement = $conn->prepare($query);
-        $statement->execute([$recpie]);//submit data from user
+        $statement = $pdo->prepare($query);
+
+        
+
+        $statement->execute();//submit data from user
+
+        
 
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
+        
 
-        $conn = null;//closing of connection to database
+        $pdo = null;//closing of connection to database
         $statement = null;
 
         
@@ -24,27 +31,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     } 
     catch (PDOException $e) 
     {
-        die("Failed". $e->getMessage());//it it fails it just terminates the script
+        echo $recpie;
+        die(" Failed ". $e->getMessage());//it it fails it just terminates the script
+        
     }
-}
-else 
-{
-    //header("");makes sure the user enter the right detals properly or sends them back to the login page
-}
+// }
+// else 
+// {
+//     //header("");makes sure the user enter the right detals properly or sends them back to the login page
+// }
 
 #########################################################################################################################
 if(empty($results))
 {
-    echo"";
+    echo"No";
 }
 else
 {
     foreach ($results as $result) 
     {
-        echo htmlspecialchars($result["recipename"]);//retrieves results 
-        echo htmlspecialchars($result["instructions"]);//need wait for html then adjust it
-        echo htmlspecialchars($result["dietaries"]);
-        echo htmlspecialchars($result["ingredients"]);
-        echo htmlspecialchars($result["links"]);
+        echo ($result["recipename"]);//retrieves results 
+        echo ($result["instructions"]);//need wait for html then adjust it
+        echo ($result["dietaries"]);
+        echo ($result["ingredients"]);
+       echo ($result["links"]);
+       
     }
 }
