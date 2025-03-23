@@ -50,11 +50,28 @@ else
 {
     foreach ($results as $result) 
     {
-        echo ($result["recipename"]);//retrieves results 
-        echo ($result["instructions"]);//need wait for html then adjust it
-        echo ($result["dietaries"]);
-        echo ($result["ingredients"]);
-       echo ($result["links"]);
+        //echo ($result["recipename"]);//retrieves results 
+        $instruction_string = ($result["instructions"]);//need wait for html then adjust it
+        //echo ($result["dietaries"]);
+        //echo ($result["ingredients"]);
+        //echo ($result["links"]);
        
     }
+//code for sorting out informatiuon to put in strings
+    $posistion1 = strpos($instruction_string, "Step 2:");//gets the position of the first instrunctions
+    $myresult1 = substr($instruction_string, 0, $posistion1);//cuts the string up to only extract the firs instrunction
+    echo $myresult1;
+    
+    
+    $posistion2 = strpos($instruction_string, "Step 3:");//get the posistion of step 2
+    $myresult2 = substr($instruction_string, $posistion1, ($posistion2 - $posistion1));
+    echo $myresult2;
+
+    $posistion3 = strpos($instruction_string, "Step 4:");//get the posistion of step 3
+    $myresult3 = substr($instruction_string, $posistion2, ($posistion3 - $posistion2));
+    echo $myresult3;
+
+    $posistion4 = strpos($instruction_string, "END.");//get the posistion of step 4
+    $myresult4 = substr($instruction_string, $posistion3, ($posistion4 - $posistion3));
+    echo $myresult4;
 }
