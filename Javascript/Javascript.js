@@ -1,16 +1,29 @@
-// variables to hold the content that will be parsed into the json file
+import fs from 'fs'
+const fs = require('fs'); // enables read and writing
+const path = require('path')
 
 var recipeId = 1; //increment ID every time new recipe is added //find a way to store this 
-var  recipeName = document.getElementById('recipeNameInputBox'); 
-var  recipeIngredients = document.getElementByClassName('recipeIngredentsBox'); //array 
-var recipeMethod = document.getElementById('recipeMethodBox'); 
 
-var recipe = { // Javascript object of the full recipe 
-RecipeId : recipeId, 
-RecipeName : recipeName, 
-RecipeIngredients : recipeIngredients, 
-RecipeMethod : recipeMethod 
-}; 
+document.getElementById("addRecipeButton").addEventListener("click", function () {
+	alert("recipe added")
+
+	var recipe = { // Javascript object of the full recipe 
+		RecipeId : recipeId, 
+		RecipeName : document.getElementById('recipeNameInputBox').innerHTML, 
+		RecipeIngredients : document.getElementById('recipeIngredientsBox').innerHTML, 
+		RecipeMethod : document.getElementById('recipeMethodBox').innerHTML 
+	};
+
+	var jsonRecipeData = JSON.stringify(recipe); //makes the Javascript object into json 
+	console.log(jsonRecipeData); 
+
+	// write a new json file in the same workspace when fields filled in 
+	fs.writeFile('recipe' + recipeId + '.json', jsonRecipeData), (error) => {  
+	
+    console.log('recipe has been written correctly'); 
+
+}
+});
 
 //establishing database connection to mySQL database 
 // C:\Users\Your Name>node demo_db_connection.js using terminal to establish database connection 
@@ -32,38 +45,6 @@ Con.connect(function(err) {
 	Console.log('Connected!'); 
 
 }); 
-
-var jsonRecipeData = JSON.stringify(recipe); //makes the Javascript object into json 
-
-const fs = require('fs'); // enables read and writing 
-
-if (isEmpty() == True) {
-
-    Document.getElementByID('errorBox').innerHTML = 'Please fill in required fields';	 
-
-} else { 
-	// write a new json file in the same workspace when fields filled in 
-fs.writeFile('recipe' + recipeId + '.json', jsonRecipeData), (error) => {  
-
-	if (error) { //error handling 
-		console.error(error); 
-		throw error; 
-
-    } 
-
-    recipeId += 1; 
-    console.log('recipe has been written correctly'); 
-
-} 
-
-}
-
-
-function isEmpty(name, ingredients, method) { //error checking to check for required fields 
-	Return (name.length === 0 || ingredients.length === 0 || method.length === 0);  
-} 
-
- 
 
 //Querying the database, it takes a SQL statement as a parameter and returns the result 
 
