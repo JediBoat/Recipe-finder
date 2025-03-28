@@ -134,9 +134,15 @@ else
                         for ($x = count($recpieresults); $x > 0; $x-=3) 
                             {
                                 echo "<p class = 'whatever'>" .$recpieresults[$j] . "</p>"; 
-                                echo "<p class = 'whatever'>" .$recpieresults[$j + 1] . "</p>"; 
-                                echo "<p class = 'whatever'>" .$recpieresults[$j + 2] . "</p>"; 
+                                echo "<p class = 'whatever'>" .$recpieresults[$j + 1] . "</p>"; //need to be change to match Phoebe css
+                                echo "<p class = 'whatever'>" .$recpieresults[$j + 2] . "</p>";
+                                echo "<form action='/action_page.php' method='post'>  
+                                        <input hidden type='number' name='recipieID' value='$recpieresults[$j]'> 
+                                        <input hidden type='number' name='recipieID' value='$recpieresults[$j]'> 
+                                        <input type='submit' value='Please click here to access recipie'>
+                                      </form> ";
                                 $j = $j + 3;
+                                
                             }
                         ?>
                     </p>
