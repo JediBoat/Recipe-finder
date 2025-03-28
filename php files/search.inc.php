@@ -2,7 +2,7 @@
 
 // if ($_SERVER["REQUEST_METHOD"] == "POST")
 // {
-     //$recpie = $_POST["recipesearch"];//replace with form variable
+//      $recpie = $_POST["recipe"];//replace with form variable
     
 
     try 
@@ -60,18 +60,101 @@ else
 //code for sorting out informatiuon to put in strings
     $posistion1 = strpos($instruction_string, "Step 2:");//gets the position of the first instrunctions
     $myresult1 = substr($instruction_string, 0, $posistion1);//cuts the string up to only extract the firs instrunction
-    echo $myresult1;
+    // echo $myresult1;
     
     
     $posistion2 = strpos($instruction_string, "Step 3:");//get the posistion of step 2
     $myresult2 = substr($instruction_string, $posistion1, ($posistion2 - $posistion1));
-    echo $myresult2;
+    // echo $myresult2;
 
     $posistion3 = strpos($instruction_string, "Step 4:");//get the posistion of step 3
     $myresult3 = substr($instruction_string, $posistion2, ($posistion3 - $posistion2));
-    echo $myresult3;
+    // echo $myresult3;
 
     $posistion4 = strpos($instruction_string, "END.");//get the posistion of step 4
     $myresult4 = substr($instruction_string, $posistion3, ($posistion4 - $posistion3));
-    echo $myresult4;
+    // echo $myresult4;
 }
+?>
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Dishcovery - Home</title>
+</head>
+<body>
+    <header> <!-- Header and container of top half of
+         the website -->
+
+        <div class="logo">Dishcovery</div>
+
+        <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
+            <ul>
+                <li><a href="index.html"> Home </a></li>
+                <li><a href="html/loginpage.html"> Sign Up/Login </a></li>
+                <li><a href="adminpage.html"> admin </a></li>
+
+            </ul>
+        </nav>
+
+        <div class="searchbar-container"> <!-- Search bar container and classes unsure what else may be needed for the future functionality but ive added what I think is necessary-->
+            <div class="search-bar">
+                <form class="search-form" method="post" action="php files\search.inc.php">
+                    <p class="search-title">Search Recipes:</p>
+                    <input type="text" id="recipe" name="recipe" class="search-input-field" placeholder="Search Recipes.." required>
+                    <button type="submit" class="search-btn"></button>
+                </form>
+            </div>
+    </header>
+
+    <section class="container"> <!-- Container of bottom half of website -->
+
+        <section class="ingrd_and_fltr-container">  <!-- Ingredient and filters container and classes --> 
+            <div class="ingrd-container"> <!-- Ingredients cointainer and classes -->
+                <ul class="ingrd-list-container">
+                   <li class="ingrd-item">
+                        <button class="add-ingrd-btn"></button> <!-- Add and remove buttons -->
+                        <button class="sub-ingrd-btn"></button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="fltr-container"> <!-- Filters container and classes -->
+                <ul class="fltr-list-container">
+                    <li class="fltr-item">
+                        <button class="add-fltr-btn"></button>
+                        <button class="sub-fltr-btn"></button>
+                    </li>
+                </ul>
+            </div>    
+        </section>
+
+        <section class="recipes-container"> <!-- Recipes container and classes -->
+            <ul class="recipe-list-container">
+                <li class="recipe-section">
+                    <p> <?php echo $myresult1; ?></p>
+                    <p> <?php echo $myresult2; ?></p>
+                    <p> <?php echo $myresult3; ?></p>
+                    <p> <?php echo $myresult4; ?></p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- <div class="current-filters">
+            <ul class="curr-filters">
+                <li class="curr-filters-section">
+                    <button class="remove-filter-btn"></button>
+                </li>
+            </ul> 
+        </div> UNSURE IF THIS IS NEEDED YET -->
+
+    </section>
+        
+    <section class="footer">
+    <!-- <div class="random-recipe"></div> POTENTIAL ADDITION UNCLEAR FOR IMPLEMENTATION -->
+    </section>  
+
+</body>
+</html>
