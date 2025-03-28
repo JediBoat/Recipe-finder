@@ -41,7 +41,7 @@
 //     //header("");makes sure the user enter the right detals properly or sends them back to the login page
 // }
 
-#########################################################################################################################
+
 if(empty($results))
 {
     echo"No";
@@ -50,11 +50,10 @@ else
 {
     foreach ($results as $result) 
     {
-        //echo ($result["recipename"]);//retrieves results 
+        $name_string = ($result["recipename"]);//retrieves results 
         $instruction_string = ($result["instructions"]);//need wait for html then adjust it
         $ingredients_string = ($result["ingredients"]);
-        //echo ($result["dietaries"]);
-        //echo ($result["ingredients"]);
+        $dietaries_string = ($result["dietaries"]);
         //echo ($result["links"]);
        
     }
@@ -62,35 +61,36 @@ else
     
     $InstructionArray = explode('Step', $instruction_string); 
     $IngredientArray = explode(',', $ingredients_string ); 
+    $DietariesArray = explode(',', $dietaries_string ); 
 
 }
 ?>
 
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Dishcovery - Home</title>
+    <title>Dishcovery - <?php echo $name_string; ?></title> 
+    <!-- Jed or Ammar needs to write code so the right recipe name shows up here -->
 </head>
+
 <body>
-    <header> <!-- Header and container of top half of
-         the website -->
+
+    <header> <!-- Header and container of top half of the website -->
 
         <div class="logo">Dishcovery</div>
 
         <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
             <ul>
-                <li><a href="index.html"> Home </a></li>
+                <li><a href="main\index.html"> Home </a></li>
                 <li><a href="html/loginpage.html"> Sign Up/Login </a></li>
-                <li><a href="adminpage.html"> admin </a></li>
-
             </ul>
         </nav>
 
         <div class="searchbar-container"> <!-- Search bar container and classes unsure what else may be needed for the future functionality but ive added what I think is necessary-->
             <div class="search-bar">
-                <form class="search-form" method="post" action="php files\search.inc.php">
+                <form class="search-form">
                     <p class="search-title">Search Recipes:</p>
                     <input type="text" id="recipe" name="recipe" class="search-input-field" placeholder="Search Recipes.." required>
                     <button type="submit" class="search-btn"></button>
@@ -98,50 +98,39 @@ else
             </div>
     </header>
 
-    <section class="container"> <!-- Container of bottom half of website -->
+    <section class="instructions-container">  
+            <div class="instructions-container"> 
+                <ul class="instructions-container">
+                    <p class="instructions-item"> <?php foreach ($InstructionArray as $Instruction) { echo $Instruction . "<br>"; } ?></p>
 
-        <section class="ingrd_and_fltr-container">  <!-- Ingredient and filters container and classes --> 
-            <div class="ingrd-container"> <!-- Ingredients cointainer and classes -->
-                <ul class="ingrd-list-container">
-                   <li class="ingrd-item">
-                        <button class="add-ingrd-btn"></button> <!-- Add and remove buttons -->
-                        <button class="sub-ingrd-btn"></button>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="fltr-container"> <!-- Filters container and classes -->
-                <ul class="fltr-list-container">
-                    <li class="fltr-item">
-                        <button class="add-fltr-btn"></button>
-                        <button class="sub-fltr-btn"></button>
-                    </li>
                 </ul>
             </div>    
-        </section>
-
-        <section class="recipes-container"> <!-- Recipes container and classes -->
-            <ul class="recipe-list-container">
-                <li class="recipe-section">
-                    <p> <?php foreach ($InstructionArray as $Instruction) { echo $Instruction . "<br>"; } ?></p>
-                    <p> <?php foreach ($IngredientArray as $Ingredient) { echo $Ingredient . "<br>"; } ?></p>
-                </li>
-            </ul>
-        </section>
-
-        <!-- <div class="current-filters">
-            <ul class="curr-filters">
-                <li class="curr-filters-section">
-                    <button class="remove-filter-btn"></button>
-                </li>
-            </ul> 
-        </div> UNSURE IF THIS IS NEEDED YET -->
-
     </section>
-        
+
+    <section class="ingrd_container">  
+            <div class="ingrd-container"> 
+                <ul class="ingrd-list-container">
+                   <p class="ingrd-item"> <?php foreach ($IngredientArray as $Ingredient) { echo $Ingredient . "<br>"; } ?></p>
+                </ul>
+            </div>
+    </section>
+
+    <section class="dietaries_container">  
+            <div class="dietaries-container"> 
+                <ul class="dietaries-list-container">
+                   <p class="dietaries-item"> <?php foreach ($DietariesArray as $Dietaries) { echo $Dietaries; } ?></p>
+                </ul>
+            </div>
+    </section>
+
+
+    
+
     <section class="footer">
-    <!-- <div class="random-recipe"></div> POTENTIAL ADDITION UNCLEAR FOR IMPLEMENTATION -->
+        <!-- <div class="random-recipe"></div> POTENTIAL ADDITION UNCLEAR FOR IMPLEMENTATION -->
     </section>  
 
+    
 </body>
 </html>
+
