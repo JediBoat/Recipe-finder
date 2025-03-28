@@ -52,28 +52,17 @@ else
     {
         //echo ($result["recipename"]);//retrieves results 
         $instruction_string = ($result["instructions"]);//need wait for html then adjust it
+        $ingredients_string = ($result["ingredients"]);
         //echo ($result["dietaries"]);
         //echo ($result["ingredients"]);
         //echo ($result["links"]);
        
     }
-//code for sorting out informatiuon to put in strings
-    $posistion1 = strpos($instruction_string, "Step 2:");//gets the position of the first instrunctions
-    $myresult1 = substr($instruction_string, 0, $posistion1);//cuts the string up to only extract the firs instrunction
-    // echo $myresult1;
     
     
-    $posistion2 = strpos($instruction_string, "Step 3:");//get the posistion of step 2
-    $myresult2 = substr($instruction_string, $posistion1, ($posistion2 - $posistion1));
-    // echo $myresult2;
+    $InstructionArray = explode('Step', $instruction_string); 
+    $IngredientArray = explode(',', $ingredients_string ); 
 
-    $posistion3 = strpos($instruction_string, "Step 4:");//get the posistion of step 3
-    $myresult3 = substr($instruction_string, $posistion2, ($posistion3 - $posistion2));
-    // echo $myresult3;
-
-    $posistion4 = strpos($instruction_string, "END.");//get the posistion of step 4
-    $myresult4 = substr($instruction_string, $posistion3, ($posistion4 - $posistion3));
-    // echo $myresult4;
 }
 ?>
 
@@ -134,10 +123,8 @@ else
         <section class="recipes-container"> <!-- Recipes container and classes -->
             <ul class="recipe-list-container">
                 <li class="recipe-section">
-                    <p> <?php echo $myresult1; ?></p>
-                    <p> <?php echo $myresult2; ?></p>
-                    <p> <?php echo $myresult3; ?></p>
-                    <p> <?php echo $myresult4; ?></p>
+                    <p> <?php foreach ($InstructionArray as $Instruction) { echo $Instruction . "<br>"; } ?></p>
+                    <p> <?php foreach ($IngredientArray as $Ingredient) { echo $Ingredient . "<br>"; } ?></p>
                 </li>
             </ul>
         </section>
