@@ -1,16 +1,17 @@
 <?php
 
-// if ($_SERVER["REQUEST_METHOD"] == "POST")
-// {
-//      $recpie = $_POST["recipe"];//replace with form variable
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+     $recpie = $_POST["recipe"];//replace with form variable
+        $recpieID = $_POST["recipieID"];//replace with form variable
     
 
     try 
     {
-        $recpie = "Gluten-free Pizza";
+
         require_once("dbapi.inc.php");//links file connects to the database
 
-        $query = "SELECT * FROM Recipes WHERE recipename = '$recpie';";// selects all the data that matches 
+        $query = "SELECT * FROM Recipes WHERE recipename = '$recpie' AND recipeID = '$recpieID';";// selects all the data that matches 
 
         $statement = $pdo->prepare($query);
 
@@ -35,11 +36,11 @@
         die(" Failed ". $e->getMessage());//it it fails it just terminates the script
         
     }
-// }
-// else 
-// {
-//     //header("");makes sure the user enter the right detals properly or sends them back to the login page
-// }
+}
+else 
+{
+    //header("");makes sure the user enter the right detals properly or sends them back to the login page
+}
 
 
 if(empty($results))

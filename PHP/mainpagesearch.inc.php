@@ -1,13 +1,13 @@
 <?php
 
-// if ($_SERVER["REQUEST_METHOD"] == "POST")
-// {
-//      $recpie = $_POST["recipe"];//replace with form variable
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+     $recpie = $_POST["recipe"];//replace with form variable
     
 
     try 
     {
-        $recpie = "Gluten-free Pizza";
+        
         require_once("dbapi.inc.php");//links file connects to the database
 
         $query = "SELECT recipeID, recipename, dietaries FROM Recipes WHERE recipename LIKE '%$recpie%' ;";// selects all the data that matches 
@@ -35,11 +35,11 @@
         die(" Failed ". $e->getMessage());//it it fails it just terminates the script
         
     }
-// }
-// else 
-// {
-//     //header("");makes sure the user enter the right detals properly or sends them back to the login page
-// }
+}
+else 
+{
+    //header("");makes sure the user enter the right detals properly or sends them back to the login page
+}
 
 
 if(empty($results))
@@ -97,7 +97,7 @@ else
 
         <div class="searchbar-container"> <!-- Search bar container and classes unsure what else may be needed for the future functionality but ive added what I think is necessary-->
             <div class="search-bar">
-                <form class="search-form" method="post" action="php files\search.inc.php">
+                <form class="search-form" method="post" action="mainpagesearch.inc.php">
                     <p class="search-title">Search Recipes:</p>
                     <input type="text" id="recipe" name="recipe" class="search-input-field" placeholder="Search Recipes.." required>
                     <button type="submit" class="search-btn"></button>
@@ -131,19 +131,32 @@ else
             <ul class="recipe-list-container">
                 <li class="recipe-section">
                     <p> <?php  $j = 0; 
-                        for ($x = count($recpieresults); $x > 0; $x-=3) 
-                            {
-                                echo "<p class = 'whatever'>" .$recpieresults[$j] . "</p>"; 
-                                echo "<p class = 'whatever'>" .$recpieresults[$j + 1] . "</p>"; //need to be change to match Phoebe css
-                                echo "<p class = 'whatever'>" .$recpieresults[$j + 2] . "</p>";
-                                echo "<form action='/action_page.php' method='post'>  
-                                        <input hidden type='number' name='recipieID' value='$recpieresults[$j]'> 
-                                        <input hidden type='number' name='recipieID' value='$recpieresults[$j]'> 
-                                        <input type='submit' value='Please click here to access recipie'>
-                                      </form> ";
-                                $j = $j + 3;
-                                
-                            }
+                        if(empty($recpieresults))
+                        {
+                            echo "<p class = 'whatever'> no </p>";
+                        }
+                        else
+                        {
+                            for ($x = count($recpieresults); $x > 0; $x-=3) 
+                                {
+                                    $value1 = $recpieresults[$j];
+                                    $value2 = $recpieresults[$j + 1];
+                                    $value3 = $recpieresults[$j + 2];
+
+                                    echo "<section class='whatever'>
+                                            <p class = 'whatever'> $value1 </p>
+                                            <p class = 'whatever'> $value2 </p>
+                                            <p class = 'whatever'> $value3 </p>
+                                            <form action='search.inc.php' method='post'>  
+                                                <input hidden type='number' name= 'recipieID' value='$value1'> 
+                                                <input hidden type='text' name='recipe' value='$value2'> 
+                                                <input type='submit' value='Please click here to access recipie'>
+                                            </form> 
+                                        </section>";
+                                    $j = $j + 3;
+                                    
+                                }
+                        }
                         ?>
                     </p>
 
