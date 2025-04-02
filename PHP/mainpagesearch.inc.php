@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 }
 else 
 {
-    //header("");makes sure the user enter the right detals properly or sends them back to the login page
+    header("mainpagesearch.inc.php");
 }
 
 
@@ -77,6 +77,10 @@ else
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
     <title>Dishcovery - Home</title>
 </head>
@@ -127,9 +131,7 @@ else
             </div>    
         </section>
 
-        <section class="recipes-container"> <!-- Recipes container and classes -->
-            <ul class="recipe-list-container">
-                <li class="recipe-section">
+        <section class="lo"> <!-- Recipes container and classes -->
                     <p> <?php  $j = 0; 
                         if(empty($recpieresults))
                         {
@@ -143,26 +145,25 @@ else
                                     $value2 = $recpieresults[$j + 1];
                                     $value3 = $recpieresults[$j + 2];
 
-                                    echo "<section class='whatever'>
-                                            <p class = 'whatever'> $value1 </p>
-                                            <p class = 'whatever'> $value2 </p>
-                                            <p class = 'whatever'> $value3 </p>
-                                            <form action='search.inc.php' method='post'>  
-                                                <input hidden type='number' name= 'recipieID' value='$value1'> 
-                                                <input hidden type='text' name='recipe' value='$value2'> 
-                                                <input type='submit' value='Please click here to access recipie'>
-                                            </form> 
-                                        </section>";
+                                    echo " <section class='recipes-container'>
+                                                <ul class='recipe-list-container'>
+                                                    <li class='recipe-section'>
+                                                        <p class = 'whatever'> $value2 </p>
+                                                        <p class = 'whatever'> $value3 </p>
+                                                        <form action='search.inc.php' method='post'>  
+                                                            <input hidden type='number' name= 'recipieID' value='$value1'> 
+                                                            <input hidden type='text' name='recipe' value='$value2'> 
+                                                            <input type='submit' value='Please click here to access recipie'>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </section>";
                                     $j = $j + 3;
                                     
                                 }
                         }
                         ?>
                     </p>
-
-   
-                </li>
-            </ul>
         </section>
 
         <!-- <div class="current-filters">

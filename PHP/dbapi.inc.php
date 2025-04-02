@@ -9,7 +9,6 @@ try//error handling in case the database is down
 {
     $pdo = new PDO($dsn, $dbusername, $dbpass);// connection to object
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);//if we get an error it throws an exception which is catched
-    echo "LETS GOO!";
 }
 catch(PDOException $e)
 {
