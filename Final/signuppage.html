@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Unsure if we will be using the same stylesheet or another for each seperate page -->
+    <title>Dishcovery - Sign Up</title>
+</head>
+<body>
+    
+    <header>
+        <div class="logo">Dishcovery</div>
+
+        <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
+            <ul>
+                <li><a href="index.html"> Home </a></li>
+                <li><a href="signinpage.html"> Sign Up/Login </a></li>
+                <li><a href="adminpage.html"> Admin </a></li>
+
+            </ul>
+        </nav>
+
+        <div class="searchbar-container"> <!-- Search bar container and classes unsure what else may be needed for the future functionality but ive added what I think is necessary-->
+            <div class="search-bar">
+                <form class="search-form" method="post" action="index.inc.php">
+                    <p class="search-title">Search Recipes:</p>
+                    <input type="text" id="recipe" name="recipe" class="search-input-field" placeholder="Search Recipes.." required>
+                    <button type="submit" class="search-btn">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+            </div>
+    </header>
+
+    <section class="sicontainer">
+        <form class="signup-form">
+            <h2 class="signup-title">Sign Up:</h2> <!-- Form for the sign up page, classes and functionality are accessible -->
+            
+            <div class="input-group">
+                <input type="text" id="username" class="input-field" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <input type="email" id="email" name="email" class="input-field" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" class="input-field" placeholder="Password" required>
+            </div>  
+            <div class="input-group">
+                <input type="password" id="confirm-password" class="input-field" placeholder="Confirm Password" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="firstname" class="input-field" placeholder="Firstname" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="secondname" class="input-field" placeholder="Secondname" required>
+            </div>
+            <div class="input-group">
+                <input type="number" id="age" class="input-field" placeholder="Age" required>
+            </div>
+            <button type="submit" class="submit-btn">Sign Up</button>
+            
+            <p class="signin-link"> Already have an account? <a href="signinpage.html"> Login here </a></p> <!-- Link to the sign up page -->
+
+        </form>
+    </section>
+
+    <section class="footer">
+
+    </section>
+
+
+</body>
+</html>
