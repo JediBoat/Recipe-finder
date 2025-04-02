@@ -133,7 +133,7 @@ else
                     <p> <?php  $j = 0; 
                         if(empty($recpieresults))
                         {
-                            echo "<p class = 'whatever'> No Recipies founds found </p>";
+                            echo "<p class = 'whatever'> No Recipies found </p>";
                         }
                         else
                         {

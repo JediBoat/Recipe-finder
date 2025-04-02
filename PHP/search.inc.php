@@ -2,8 +2,8 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-     $recpie = $_POST["recipe"];//replace with form variable
-        $recpieID = $_POST["recipieID"];//replace with form variable
+    $recpie = $_POST["recipe"];//replace with form variable
+    $recpieID = $_POST["recipieID"];//replace with form variable
     
 
     try 
