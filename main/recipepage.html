@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles.css">
     <title>Dishcovery - Recipe</title> 
     <!-- Jed or Ammar needs to write code so the right recipe name shows up here -->
 </head>
@@ -16,7 +21,7 @@
         <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
             <ul>
                 <li><a href="index.html"> Home </a></li>
-                <li><a href="html/loginpage.html"> Sign Up/Login </a></li>
+                <li><a href="signinpage.html"> Sign Up/Login </a></li>
             </ul>
         </nav>
 
@@ -25,7 +30,9 @@
                 <form class="search-form">
                     <p class="search-title">Search Recipes:</p>
                     <input type="text" id="recipe" name="recipe" class="search-input-field" placeholder="Search Recipes.." required>
-                    <button type="submit" class="search-btn"></button>
+                    <button type="submit" class="search-btn">
+                        <i class="fa fa-search"></i>
+                    </button>
                 </form>
             </div>
     </header>
