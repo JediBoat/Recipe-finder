@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $pdo = null;//closing of connection to database
         $statement = null;
 
-        header("mainpagesearch.inc.php");
+        header("index.inc.php");
         die();
       
         
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 }
 else
 {
-    header("mainpagesearch.inc.php");
+    header("index.inc.php");
 
 }
 

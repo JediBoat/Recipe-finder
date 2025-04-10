@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     try 
     {
-
+        
         require_once("dbapi.inc.php");//links file connects to the database
 
         $query = "SELECT * FROM Recipes WHERE recipename = '$recpie' AND recipeID = '$recpieID';";// selects all the data that matches 
@@ -26,9 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
         $pdo = null;//closing of connection to database
         $statement = null;
-
-        
-        
+      
     } 
     catch (PDOException $e) 
     {
@@ -45,7 +43,7 @@ else
 
 if(empty($results))
 {
-    echo"No";
+
 }
 else
 {
@@ -89,17 +87,18 @@ else
 
         <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
             <ul>
-                <li><a href="main\index.html"> Home </a></li>
-                <li><a href="html/loginpage.html"> Sign Up/Login </a></li>
+            <li><a href="index.inc.php"> Home </a></li>
+                <li><a href="../main/signinpage.html"> Sign Up/Login </a></li>
             </ul>
         </nav>
 
         <div class="searchbar-container"> <!-- Search bar container and classes unsure what else may be needed for the future functionality but ive added what I think is necessary-->
             <div class="search-bar">
-                <form class="search-form">
+                <form class="search-form" method="post" action="index.inc.php">
                     <p class="search-title">Search Recipes:</p>
                     <input type="text" id="recipe" name="recipe" class="search-input-field" placeholder="Search Recipes.." required>
-                    <button type="submit" class="search-btn"></button>
+                    <button type="submit" class="search-btn"><i class="fa fa-search"></i>
+                    </button>
                 </form>
             </div>
     </header>
@@ -139,4 +138,3 @@ else
     
 </body>
 </html>
-

@@ -3,12 +3,14 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
      $recpie = $_POST["recipe"];//replace with form variable
+
     
 
     try 
     {
-        
+        ob_start();
         require_once("dbapi.inc.php");//links file connects to the database
+        ob_end_clean();
 
         $query = "SELECT recipeID, recipename, dietaries FROM Recipes WHERE recipename LIKE '%$recpie%' ;";// selects all the data that matches 
 
@@ -39,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 else 
 {
     header("index.inc.php");
+    $recpie = "blank";
 }
 
 
@@ -92,8 +95,8 @@ else
         <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
             <ul>
                 <li><a href="index.inc.php"> Home </a></li>
-                <li><a href="signinpage.html"> Sign Up/Login </a></li>
-                <li><a href="adminpage.html"> admin </a></li>
+                <li><a href="../main/signinpage.html"> Sign Up/Login </a></li>
+                <li><a href="../main/adminpage.html"> admin </a></li>
 
             </ul>
         </nav>
@@ -115,8 +118,8 @@ else
             <div class="ingrd-container"> <!-- Ingredients cointainer and classes -->
                 <ul class="ingrd-list-container">
                    <li class="ingrd-item">
-                        <button class="add-ingrd-btn"></button> <!-- Add and remove buttons -->
-                        <button class="sub-ingrd-btn"></button>
+                    <button class="add-ingrd-btn"><i class="fa fa-plus"></i> Ingredients</button> <!-- Add and remove buttons -->
+                    <button class="sub-ingrd-btn"><i class="fa fa-minus"></i> Ingredients</button>
                     </li>
                 </ul>
             </div>
@@ -124,8 +127,8 @@ else
             <div class="fltr-container"> <!-- Filters container and classes -->
                 <ul class="fltr-list-container">
                     <li class="fltr-item">
-                        <button class="add-fltr-btn"></button>
-                        <button class="sub-fltr-btn"></button>
+                        <button class="add-fltr-btn"><i class="fa fa-plus"></i> Filters</button>
+                        <button class="sub-fltr-btn"><i class="fa fa-minus"></i> Filters</button>
                     </li>
                 </ul>
             </div>    
