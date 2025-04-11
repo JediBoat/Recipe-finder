@@ -32,7 +32,6 @@ app.post('/add-recipe', (req, res) => {
         }
         console.log('Recipe written to:', filePath);
         res.json({ message: 'Recipe saved', id: recipe.RecipeId });
-        location.replace("http://localhost:3000/PHP/addrecpie.inc.php");
     });
 });
 

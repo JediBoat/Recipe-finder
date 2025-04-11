@@ -159,7 +159,7 @@ header {
     align-items: center;
 }
 
-#recipeNameInputBox, #recipeIngredientsBox, #recipeMethodBox {
+#recipeNameInputBox, #recipeIngredientsBox, #recipeMethodBox, #recipeDietariesBox, #recipeLinksBox {
     border-radius: 10px;
     border: none;
     font-size: 18px;

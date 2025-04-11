@@ -22,9 +22,10 @@ try
 
         $pdo = null;//closing of connection to database
         $statement = null;
-        echo "sucess";
+        
 
-        die();
+        header("Location: http://localhost:7000/adminpage.html");
+        exit();
     } 
     catch (PDOException $e) 
     {

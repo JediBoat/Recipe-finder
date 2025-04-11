@@ -19,6 +19,7 @@ document.getElementById("addRecipeButton").addEventListener("click", function ()
     .then(data => {
         alert("Recipe added successfully!");
         console.log(data);
+        window.location.replace('http://localhost:3000/PHP/addrecpie.inc.php');
     })
     .catch(error => {
         console.error('Error:', error);
