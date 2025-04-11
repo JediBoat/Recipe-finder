@@ -59,7 +59,7 @@ header {
     box-sizing: border-box;
 }
 
-.search btn {
+.search-btn {
     background: transparent;
     border: none;
     cursor: pointer;
@@ -102,6 +102,13 @@ header {
     list-style: none;
     background: #E9F2EA;
     text-align: center;
+}
+
+.add-recipe-btn {
+    border-radius: 10px;
+    border-width: 1px;
+    cursor: pointer;
+    font-size: 13px;
 }
 
 /* sign in and up, account and account deletion pages */
