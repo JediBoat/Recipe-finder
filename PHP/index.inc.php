@@ -8,11 +8,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     try 
     {
-        ob_start();
         require_once("dbapi.inc.php");//links file connects to the database
-        ob_end_clean();
 
-        $query = "SELECT recipeID, recipename, dietaries FROM Recipes WHERE recipename LIKE '%$recpie%' ;";// selects all the data that matches 
+        $query = "SELECT recipeID, recipename, dietaries, links FROM Recipes WHERE recipename LIKE '%$recpie%' ;";// selects all the data that matches 
 
         $statement = $pdo->prepare($query);
 
@@ -61,6 +59,8 @@ else
         $recpieresults[$i] = ($result["recipename"]);
         $i = $i+1;
         $recpieresults[$i] = ($result["dietaries"]);
+        $i = $i+1;
+        $recpieresults[$i] = ($result["links"]);
         $i = $i+1;
 
        
@@ -142,15 +142,17 @@ else
                         }
                         else
                         {
-                            for ($x = count($recpieresults); $x > 0; $x-=3) 
+                            for ($x = count($recpieresults); $x > 0; $x-=4) 
                                 {
                                     $value1 = $recpieresults[$j];
                                     $value2 = $recpieresults[$j + 1];
                                     $value3 = $recpieresults[$j + 2];
+                                    $value4 = $recpieresults[$j + 3];
 
                                     echo " <section class='recipes-container'>
                                                 <ul class='recipe-list-container'>
                                                     <li class='recipe-section'>
+                                                        <img src='../Recipie images/Gluten-freepizza.png'width='200' height='150'>
                                                         <p class = 'whatever'> $value2 </p>
                                                         <p class = 'whatever'> $value3 </p>
                                                         <form action='search.inc.php' method='post'>  
@@ -161,7 +163,7 @@ else
                                                     </li>
                                                 </ul>
                                             </section>";
-                                    $j = $j + 3;
+                                    $j = $j + 4;
                                     
                                 }
                         }
