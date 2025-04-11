@@ -1,3 +1,67 @@
+<?php
+
+// if ($_SERVER["REQUEST_METHOD"] == "POST")
+// {
+//     // $email = $_POST["email"];//replace with form variable
+//     // $pwd = $_POST["pwd"];//replace with form variable
+    
+
+//     try 
+//     {
+        
+//         // require_once("dbapi.inc.php");//links file connects to the database
+
+//         // $query = "SELECT * FROM Accounts WHERE email = '$email' AND pwd = '$pwd';";// selects all the data that matches 
+
+//         // $statement = $pdo->prepare($query);
+
+        
+
+//         // $statement->execute();//submit data from user
+
+        
+
+//         // $results = $statement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
+        
+
+//         // $pdo = null;//closing of connection to database
+//         // $statement = null;
+      
+//     } 
+//     catch (PDOException $e) 
+//     {
+//         // echo $recpie;
+//         die(" Failed ". $e->getMessage());//it it fails it just terminates the script
+        
+//     }
+// }
+// else 
+// {
+//     header("Location: ../main/recipepage.html");
+// }
+
+
+// if(empty($results))
+// {
+
+// }
+// else
+// {
+//     foreach ($results as $result) 
+//     {
+//         // $acountID = ($result["acountID"]);//retrieves results 
+//         // $username = ($result["username"]);//need wait for html then adjust it
+//         // $email = ($result["email"]);
+//         // $firstname = ($result["firstname"]);
+//         // $secondname = ($result["secondname"]);
+//         // $age = ($result["age"]);
+       
+//     }
+    
+// }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +82,8 @@
 
         <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
             <ul>
-                <li><a href="index.html"> Home </a></li>
-                <li><a href="signinpage.html"> Logout </a></li>
+                <li><a href="index.inc.php"> Home </a></li>
+                <li><a href="../main/signinpage.html"> Sign Up/Login </a></li>
             </ul>
         </nav>
 
