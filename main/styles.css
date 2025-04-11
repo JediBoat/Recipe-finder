@@ -104,15 +104,15 @@ header {
     text-align: center;
 }
 
-/* sign in and up pages */
-.sicontainer {
+/* sign in and up, account and account deletion pages */
+.sicontainer, .accontainer, .acontainer {
     display: flex;
     justify-content: center;
     padding-top: 20px;
     margin-top: 40px;
 }
 
-.login-form, .signup-form {
+.login-form, .signup-form, .delete-form, .account-form {
     background:#E9F2EA;
     padding-left: 40px;
     padding-right: 40px;
@@ -121,24 +121,24 @@ header {
     border-radius: 10px;
 }
 
-.signin-title, .signup-title {
+.signin-title, .signup-title, .delete-title, .account-title {
     text-align: center;
     font-size: 22px;
     margin-bottom: 20px;
 }
 
-.sicontainer .input-field {
+.sicontainer .input-field, .accontainer .input-field, .acontainer .input-field {
     border-radius: 10px;
     border: none;
     width: 100%;
     font-size: 15px;
 }
 
-.sicontainer .input-group {
+.sicontainer .input-group, .accontainer .input-group, .acontainer .input-group {
     padding-bottom: 15px;
 }
 
-.submit-btn {
+.submit-btn, .logoutbtn {
     border-radius: 10px;
     border: none;
     cursor: pointer;
@@ -146,8 +146,15 @@ header {
     font-size: 15px;
 }
 
-.signup-link a, .signin-link a {
+.logoutbtn a {
+    text-decoration: none;
     color: inherit;
+}
+
+#acEmail {
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
 }
 
 /* admin page */
@@ -180,34 +187,6 @@ header {
 
 #adminDesc {
     padding-bottom: 15px;
-}
-
-/* account page */
-.accontainer {
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-    margin-top: 40px;
-}
-
-.logoutbtn
-{
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    background-color: white;
-    font-size: 15px;
-}
-
-.logoutbtn a {
-    text-decoration: none;
-    color: inherit;
-}
-
-#acEmail {
-    border-radius: 10px;
-    border: none;
-    font-size: 18px;
 }
 
 
