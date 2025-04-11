@@ -96,7 +96,7 @@ else
             <ul>
                 <li><a href="index.inc.php"> Home </a></li>
                 <li><a href="../main/signinpage.html"> Sign Up/Login </a></li>
-                <li><a href="../main/adminpage.html"> admin </a></li>
+                <li><a href="http://localhost:7000/adminpage.html"> admin </a></li>
 
             </ul>
         </nav>
@@ -152,7 +152,7 @@ else
                                     echo " <section class='recipes-container'>
                                                 <ul class='recipe-list-container'>
                                                     <li class='recipe-section'>
-                                                        <img src='../Recipie images/Gluten-freepizza.png'width='200' height='150'>
+                                                        <img src='../Recipie images/$value4'width='200' height='150'>
                                                         <p class = 'whatever'> $value2 </p>
                                                         <p class = 'whatever'> $value3 </p>
                                                         <form action='search.inc.php' method='post'>  

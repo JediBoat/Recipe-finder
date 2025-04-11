@@ -24,7 +24,7 @@ app.post('/add-recipe', (req, res) => {
         ...req.body
     };
 
-    const filePath = path.join(__dirname, `recipe${recipe.RecipeId}.json`);
+    const filePath = path.join(__dirname, `recipe.json`);
     fs.writeFile(filePath, JSON.stringify(recipe, null, 2), (err) => {
         if (err) {
             console.error('Error writing file:', err);
@@ -32,6 +32,7 @@ app.post('/add-recipe', (req, res) => {
         }
         console.log('Recipe written to:', filePath);
         res.json({ message: 'Recipe saved', id: recipe.RecipeId });
+        location.replace("http://localhost:3000/PHP/addrecpie.inc.php");
     });
 });
 

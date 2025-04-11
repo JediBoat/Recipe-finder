@@ -1,9 +1,11 @@
 document.getElementById("addRecipeButton").addEventListener("click", function () {
 
 	var recipe = { // Javascript object of the full recipe 
-		RecipeName : document.getElementById('recipeNameInputBox').value, 
+		RecipeName : document.getElementById('recipeNameInputBox').value,
+		RecipeMethod : document.getElementById('recipeMethodBox').value,
 		RecipeIngredients : document.getElementById('recipeIngredientsBox').value, 
-		RecipeMethod : document.getElementById('recipeMethodBox').value
+		RecipeDietaries : document.getElementById('recipeDietariesBox').value,
+		RecipeLinks : document.getElementById('recipeLinksBox').value
 	};
 
 	fetch('/add-recipe', { // fetch request to 
@@ -26,36 +28,36 @@ document.getElementById("addRecipeButton").addEventListener("click", function ()
 //establishing database connection to mySQL database 
 // C:\Users\Your Name>node demo_db_connection.js using terminal to establish database connection 
 
-var mysql = require('mysql'); // insert mysql link 
+// var mysql = require('mysql'); // insert mysql link 
 
-var con = mysql.createConnection({  
+// var con = mysql.createConnection({  
 
-	host : 'sql8.freesqldatabase.com', 
-	user: 'sql8768869', 
-	password : 'jICFgdSB17' 
+// 	host : 'sql8.freesqldatabase.com', 
+// 	user: 'sql8768869', 
+// 	password : 'jICFgdSB17' 
 
-}); 
+// }); 
 
-Con.connect(function(err) { 
+// Con.connect(function(err) { 
 
-	If (err) ; throw err; 
+// 	If (err) ; throw err; 
 
-	Console.log('Connected!'); 
+// 	Console.log('Connected!'); 
 
-}); 
+// }); 
 
-//Querying the database, it takes a SQL statement as a parameter and returns the result 
+// //Querying the database, it takes a SQL statement as a parameter and returns the result 
 
-con.connect(function(err) { 
+// con.connect(function(err) { 
 
-	If (err) ; throw err; 
-	console.log('Connected');
+// 	If (err) ; throw err; 
+// 	console.log('Connected');
 
-con.query(sql, function (err, result) { 
+// con.query(sql, function (err, result) { 
 
-	If (err) ; throw err; 
-	Console.log('Result: ' + result); 
+// 	If (err) ; throw err; 
+// 	Console.log('Result: ' + result); 
 
-});	 
+// });	 
 
-}); 
+// }); 
