@@ -77,7 +77,7 @@ else
 if(empty($useraccount))
 {   
     $linkaddress = "../PHP/accountpage.inc.php"
-    $linkname = $useraccount["AccountID"];
+    $linkname = $useraccount["Username"];
 }
 else
 {   

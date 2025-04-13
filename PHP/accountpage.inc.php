@@ -33,47 +33,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         die(" Failed ". $e->getMessage());//it it fails it just terminates the script
         
     }
+
+
+    if(empty($results))
+    {
+
+    }
+    else
+    {
+        foreach ($results as $result) 
+        {
+            $acountID = ($result["acountID"]);//retrieves results 
+            $username = ($result["username"]);//need wait for html then adjust it
+            $email = ($result["email"]);
+            $firstname = ($result["firstname"]);
+            $secondname = ($result["secondname"]);
+            $age = ($result["age"]);
+        
+        }
+
+        $path = "../account.json";
+        $jsonData = [
+                        [
+                            "AccountID" =>  $acountID,
+                            "Username" => $username,
+                            "Email" => $email,
+                            "Firstname" => $firstname,
+                            "Secondname" => $secondname,
+                            "Age" => $age
+                        ]
+                    ];
+
+                    $jsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
+
+                    $fp = fopen($path, "w");
+                    fwrite($fp, $jsonString);
+                    fclose($fp);
+
+        
+    }
 }
+
  
 
-
-if(empty($results))
+if (file_exists("../account.json")) //checks if there is an  account json file 
 {
-
+    $json_data = file_get_contents("../account.json");
+    $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
 }
 else
 {
-    foreach ($results as $result) 
-    {
-        $acountID = ($result["acountID"]);//retrieves results 
-        $username = ($result["username"]);//need wait for html then adjust it
-        $email = ($result["email"]);
-        $firstname = ($result["firstname"]);
-        $secondname = ($result["secondname"]);
-        $age = ($result["age"]);
-       
-    }
+    $useraccount = "blank";
+}
 
-    $path = "../account.json";
-    $jsonData = [
-                    [
-                        "AccountID" =>  $acountID,
-                        "Username" => $username,
-                        "Email" => $email,
-                        "Firstname" => $firstname,
-                        "Secondname" => $secondname,
-                        "Age" => $age
-                    ]
-                ];
+if(empty($useraccount))
+{   
+    $linkaddress = "../PHP/accountpage.inc.php"
 
-                $jsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
-
-                $fp = fopen($path, "w");
-                fwrite($fp, $jsonString);
-                fclose($fp);
-
+    $displayname = $useraccount["Username"];
+    $displayemail = $useraccount["Email"];
+    $displayfirstn = $useraccount["Firstname"];
+    $displaysecondn = $useraccount["Secondname"];
+    $displayage = $useraccount["Age"];
+}
+else
+{   
+    $linkaddress = "../main/signinpage.html"
+    $linkname = "Sign Up/Login";
     
 }
+
 ?>
 
 
@@ -98,7 +127,7 @@ else
         <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
             <ul>
                 <li><a href="index.inc.php"> Home </a></li>
-                <li><a href="../main/signinpage.html"> Sign Up/Login </a></li>
+                <li><a href="<?php echo $linkaddress;?>"> <?php echo $linkname; ?> </a></li>
             </ul>
         </nav>
 
