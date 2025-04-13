@@ -8,8 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     try 
     {
-        $json_data = file_get_contents("../account.json");
-        $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
 
         require_once("dbapi.inc.php");//links file connects to the database
 
@@ -71,6 +69,16 @@ else
 
 
 
+}
+
+if (file_exists("../account.json")) //checks if there is an  account json file 
+{
+    $json_data = file_get_contents("../account.json");
+    $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+}
+else
+{
+    $useraccount = "blank";
 }
 
 if(empty($useraccount))
