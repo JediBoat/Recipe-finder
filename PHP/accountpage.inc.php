@@ -1,64 +1,83 @@
 <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    $email = $_POST["username"];//replace with form variable
+    $pwd = $_POST["password"];//replace with form variable
 
-// if ($_SERVER["REQUEST_METHOD"] == "POST")
-// {
-//     // $email = $_POST["email"];//replace with form variable
-//     // $pwd = $_POST["pwd"];//replace with form variable
-    
 
-//     try 
-//     {
-        
-//         // require_once("dbapi.inc.php");//links file connects to the database
+    try 
+    {
+        require_once("dbapi.inc.php");//links file connects to the database
 
-//         // $query = "SELECT * FROM Accounts WHERE email = '$email' AND pwd = '$pwd';";// selects all the data that matches 
 
-//         // $statement = $pdo->prepare($query);
+        $query = "SELECT * FROM Accounts WHERE email = '$email' AND pwd = '$pwd';";// selects all the data that matches 
 
-        
-
-//         // $statement->execute();//submit data from user
+        $statement = $pdo->prepare($query);
 
         
 
-//         // $results = $statement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
+        $statement->execute();//submit data from user
+
         
 
-//         // $pdo = null;//closing of connection to database
-//         // $statement = null;
-      
-//     } 
-//     catch (PDOException $e) 
-//     {
-//         // echo $recpie;
-//         die(" Failed ". $e->getMessage());//it it fails it just terminates the script
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
         
-//     }
-// }
-// else 
-// {
-//     header("Location: ../main/recipepage.html");
-// }
+
+        $pdo = null;//closing of connection to database
+        $statement = null;
+        
+    } 
+    catch (PDOException $e) 
+    {
+        
+        die(" Failed ". $e->getMessage());//it it fails it just terminates the script
+        
+    }
+}
+else
+{
+    header("accountpage.inc.php");
+
+}
 
 
-// if(empty($results))
-// {
+if(empty($results))
+{
 
-// }
-// else
-// {
-//     foreach ($results as $result) 
-//     {
-//         // $acountID = ($result["acountID"]);//retrieves results 
-//         // $username = ($result["username"]);//need wait for html then adjust it
-//         // $email = ($result["email"]);
-//         // $firstname = ($result["firstname"]);
-//         // $secondname = ($result["secondname"]);
-//         // $age = ($result["age"]);
+}
+else
+{
+    foreach ($results as $result) 
+    {
+        $acountID = ($result["acountID"]);//retrieves results 
+        $username = ($result["username"]);//need wait for html then adjust it
+        $email = ($result["email"]);
+        $firstname = ($result["firstname"]);
+        $secondname = ($result["secondname"]);
+        $age = ($result["age"]);
        
-//     }
+    }
+
+    $path = "../account.json";
+    $jsonData = [
+                    [
+                        "AccountID" =>  $acountID,
+                        "Username" => $username,
+                        "Email" => $email,
+                        "Firstname" => $firstname,
+                        "Secondname" => $secondname,
+                        "Age" => $age
+                    ]
+                ];
+
+                $jsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
+
+                $fp = fopen($path, "w");
+                fwrite($fp, $jsonString);
+                fclose($fp);
+
     
-// }
+}
 ?>
 
 
