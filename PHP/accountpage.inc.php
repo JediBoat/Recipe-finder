@@ -34,11 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         
     }
 }
-else
-{
-    header("accountpage.inc.php");
-
-}
+ 
 
 
 if(empty($results))

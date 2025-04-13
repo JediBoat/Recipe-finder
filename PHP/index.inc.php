@@ -8,6 +8,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     try 
     {
+        $json_data = file_get_contents("../account.json");
+        $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+
         require_once("dbapi.inc.php");//links file connects to the database
 
         $query = "SELECT recipeID, recipename, dietaries, links FROM Recipes WHERE recipename LIKE '%$recpie%' ;";// selects all the data that matches 
@@ -43,7 +46,7 @@ else
 }
 
 
-if(empty($results))
+if(empty($results))// for getting the right information out
 {
 }
 else
@@ -69,7 +72,18 @@ else
 
 
 }
-; 
+
+if(empty($useraccount))
+{   
+    $linkaddress = "../PHP/accountpage.inc.php"
+    $linkname = $useraccount["AccountID"];
+}
+else
+{   
+    $linkaddress = "../main/signinpage.html"
+    $linkname = "Sign Up/Login";
+    
+}
 
 
 ?>
@@ -95,7 +109,7 @@ else
         <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
             <ul>
                 <li><a href="index.inc.php"> Home </a></li>
-                <li><a href="../main/signinpage.html"> Sign Up/Login </a></li>
+                <li><a href="<?php echo $linkaddress;?>"> <?php echo $linkname; ?> </a></li>
                 <li><a href="http://localhost:7000/adminpage.html"> admin </a></li>
 
             </ul>
