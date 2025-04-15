@@ -29,14 +29,27 @@
     </header>
 
     <section class="admin-container"> <!-- Admin Message -->
+    <form class="admin-form">
         <h2 id="welcomeAdmin">Welcome, Admin</h2>
         <h4 id="adminDesc">Use the nav bar to manage recipes, user accounts and the Website Settings.</h4>
-        <input type="text" id="recipeNameInputBox"><br><br>
-        <input type="text" id="recipeMethodBox"><br><br>
-        <input type="text" id="recipeIngredientsBox"><br><br>
-        <input type="text" id="recipeDietariesBox"><br><br>
-        <input type="text" id="recipeLinksBox"><br><br>
+        <p id="adminInputBelow">Use the input boxes below to add a new recipe:</p>
+        <div class="admin-form-row">
+        <label for="recipeNameInputBox">Recipe Name:</label><input type="text" id="recipeNameInputBox"><br><br>
+        </div>
+        <div class="admin-form-row">
+        <label for="recipeMethodBox">Instructions:</label><input type="text" id="recipeMethodBox"><br><br>
+        </div>
+        <div class="admin-form-row">
+        <label for="recipeIngredientsBox">Ingredients:</label><input type="text" id="recipeIngredientsBox"><br><br>
+        </div>
+        <div class="admin-form-row">
+        <label for="recipeDietariesBox">Dietary:</label><input type="text" id="recipeDietariesBox"><br><br>
+        </div>
+        <div class="admin-form-row">
+        <label for="recipeLinksBox">Link:</label><input type="text" id="recipeLinksBox"><br><br>
+        </div>
         <button type="button" id="addRecipeButton"><i class="fa fa-plus"></i> Add Recipe</button>
+    </form>
     </section>
 
     <section class="footer">
