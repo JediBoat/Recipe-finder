@@ -90,12 +90,18 @@ header {
 }
 
 /* index recipe display (right section) */
-.recipes-container {
+.recipes-container { 
+    display: flex;
+    width: 75%;
+}
+
+.recipe-list-container {
     flex-grow: 1;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
-    gap: 5px 
+    gap: 5px;
+    max-height: 250px;
 }
 
 .recipe-section {
