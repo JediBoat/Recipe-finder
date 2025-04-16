@@ -90,12 +90,18 @@ header {
 }
 
 /* index recipe display (right section) */
-.recipes-container {
+.recipes-container { 
+    display: flex;
+    width: 75%;
+}
+
+.recipe-list-container {
     flex-grow: 1;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
-    gap: 5px 
+    gap: 5px;
+    max-height: 250px;
 }
 
 .recipe-section {
@@ -166,18 +172,51 @@ header {
 
 /* admin page */
 .admin-container {
-    padding-top: 30px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    padding-top: 20px;
+    margin-top: 40px;
+}
+
+.admin-form {
+    background: #E9F2EA;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+    padding-top: 20px;
+    border-radius: 10px;
+}
+
+#welcomeAdmin {
+    font-size: 22px;
+    text-align: center;
+}
+
+#adminDesc {
+    text-decoration: underline;
+    text-underline-offset: 15px;
+}
+
+#adminInputBelow {
+    padding-top: 10px;
+}
+
+.admin-form-row {
+    padding-bottom: 10px;
+    display: flex;
     align-items: center;
+    margin-bottom: 10px;
+}
+
+.admin-form-row label {
+    width: 110px;
 }
 
 #recipeNameInputBox, #recipeIngredientsBox, #recipeMethodBox, #recipeDietariesBox, #recipeLinksBox {
     border-radius: 10px;
     border: none;
     font-size: 18px;
-    width: 50%;
+    width: 80%;
 } 
 
 #addRecipeButton {
@@ -186,14 +225,6 @@ header {
     cursor: pointer;
     font-size: 15px;
     background-color: white;
-}
-
-#welcomeAdmin {
-    font-size: 22px;
-}
-
-#adminDesc {
-    padding-bottom: 15px;
 }
 
 
