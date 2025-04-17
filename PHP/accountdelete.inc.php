@@ -1,15 +1,19 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-    $username = $_POST["username"];//replace with form variable
+    $email = $_POST["email"];//replace with form variable
     $pwd= $_POST["pwd"];//replace with form variable
-    $accountid = $_POST["accountID"];
 
     try 
     {
+        $json_data = file_get_contents("../account.json");
+        $accountdata = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+
+        $accountid = $accountdata["AccountID"];
+
         require_once("dbapi.inc.php");//links file connects to the database
 
-        $query = "DELETE FROM username = $username AND pwd = $pwd AND acountID = $accountid;";//deletes user
+        $query = "DELETE FROM email = $email AND pwd = $pwd AND acountID = $accountid;";//deletes user
 
         $statement = $pdo->prepare($query);
 
