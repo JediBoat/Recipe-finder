@@ -76,14 +76,15 @@ else
 
 if(empty($useraccount))
 {   
-    $linkaddress = "../PHP/accountpage.inc.php"
-    $linkname = $useraccount["Username"];
+
+    $linkaddress = "../main/signinpage.html"
+    $linkname = "Sign Up/Login";
+
 }
 else
 {   
-    $linkaddress = "../main/signinpage.html"
-    $linkname = "Sign Up/Login";
-    
+    $linkaddress = "../PHP/accountpage.inc.php"
+    $linkname = $useraccount["Username"]; 
 }
 
 ?>

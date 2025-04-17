@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")//runs only if there is a post request
         
         }
 
-        $path = "../account.json";
+        $path = dirname()."/account.json";
         $jsonData = [
                         [
                             "AccountID" =>  $acountID,
@@ -88,6 +88,13 @@ else
 
 if(empty($useraccount))
 {   
+
+    $linkaddress = "../main/signinpage.html"
+    $linkname = "Sign Up/Login";
+
+}
+else
+{   
     $linkaddress = "../PHP/accountpage.inc.php"
 
     $displayname = $useraccount["Username"];
@@ -95,13 +102,9 @@ if(empty($useraccount))
     $displayfirstn = $useraccount["Firstname"];
     $displaysecondn = $useraccount["Secondname"];
     $displayage = $useraccount["Age"];
-}
-else
-{   
-    $linkaddress = "../main/signinpage.html"
-    $linkname = "Sign Up/Login";
     
 }
+
 
 ?>
 
@@ -168,7 +171,7 @@ else
             <div class="input-group">
                 <input type="password" id="pwd" class="input-field" placeholder="Password" required>
             </div>
-            <button type="submit" class="logoutbtn"><a href="signinpage.html"> Logout </a></button>
+            <button type="submit" class="logoutbtn" id="logout"><a href="signinpage.html"> Logout </a></button>
             <p class="delete-link">Want to delete your account?<a href="../main/delaccountpage.html"> Click here</a></p>
         </form>
     </section>
@@ -176,5 +179,7 @@ else
     <section class="footer">
         
     </section>
+
+    <script src="../main/Javascript/logout.js"></script>
 </body>
 </html>
