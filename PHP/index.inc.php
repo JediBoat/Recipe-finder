@@ -158,7 +158,8 @@ else
         </section>
 
         <section> <!-- Recipes container and classes -->
-                    <p> <?php  $j = 0; 
+            <section class='recipes-container'>
+                     <?php  $j = 0; 
                         if(empty($recpieresults))
                         {
                             echo "<p class = 'whatever'> No Recipies found </p>";
@@ -172,26 +173,26 @@ else
                                     $value3 = $recpieresults[$j + 2];
                                     $value4 = $recpieresults[$j + 3];
 
-                                    echo " <section class='recipes-container'>
-                                                <ul class='recipe-list-container'>
-                                                    <li class='recipe-section'>
-                                                        <img src='../Recipie images/$value4'width='200' height='150'>
-                                                        <p class = 'whatever'> $value2 </p>
-                                                        <p class = 'whatever'> $value3 </p>
-                                                        <form action='search.inc.php' method='post'>  
-                                                            <input hidden type='number' name= 'recipieID' value='$value1'> 
-                                                            <input hidden type='text' name='recipe' value='$value2'> 
-                                                            <input type='submit' value='Please click here to access recipie'>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </section>";
+                                    echo " 
+                                         <ul class='recipe-list-container'>
+                                            <li class='recipe-section'>
+                                                <img class='recipe-img' src='../Recipie images/$value4'>
+                                                    <p class = 'whatever'> $value2 </p>
+                                                    <p class = 'whatever'> $value3 </p>
+                                                    <form action='search.inc.php' method='post'>  
+                                                        <input hidden type='number' name= 'recipieID' value='$value1'> 
+                                                        <input hidden type='text' name='recipe' value='$value2'> 
+                                                        <input type='submit' value='View recipe'>
+                                                    </form>
+                                                </li>
+                                            </ul>";
                                     $j = $j + 4;
                                     
                                 }
                         }
                         ?>
-                    </p>
+                    
+            </section>
         </section>
 
         <!-- <div class="current-filters">
