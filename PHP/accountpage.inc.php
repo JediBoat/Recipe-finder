@@ -76,34 +76,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")//runs only if there is a post request
 
  
 // runs no matter what so the right information will always be shown
-if (file_exists("../account.json")) //checks if there is an  account json file 
-{
-    $json_data = file_get_contents("../account.json");
-    $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
-}
-else
-{
-    $useraccount = "blank";
-}
+// if (file_exists("../account.json")) //checks if there is an  account json file 
+// {
+//     $json_data = file_get_contents("../account.json");
+//     $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+// }
+// else
+// {
+//     $useraccount = "blank";
+// }
 
-if(empty($useraccount))
-{   
+// if(empty($useraccount))
+// {   
 
-    $linkaddress = "../main/signinpage.html";
-    $linkname = "Sign Up/Login";
+//     $linkaddress = "../main/signinpage.html";
+//     $linkname = "Sign Up/Login";
 
-}
-else
-{   
-    $linkaddress = "../PHP/accountpage.inc.php";
+// }
+// else
+// {   
+//     $linkaddress = "../PHP/accountpage.inc.php";
 
-    $displayname = $useraccount["Username"];
-    $displayemail = $useraccount["Email"];
-    $displayfirstn = $useraccount["Firstname"];
-    $displaysecondn = $useraccount["Secondname"];
-    $displayage = $useraccount["Age"];
+//     $displayname = $useraccount["Username"];
+//     $displayemail = $useraccount["Email"];
+//     $displayfirstn = $useraccount["Firstname"];
+//     $displaysecondn = $useraccount["Secondname"];
+//     $displayage = $useraccount["Age"];
     
-}
+// }
 
 
 ?>
@@ -130,7 +130,7 @@ else
         <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
             <ul>
                 <li><a href="../PHP/index.inc.php"> Home </a></li>
-                <li><a href="signinpage.html"> Sign Up/Login </a></li>
+                <li><a href="../main/signinpage.html"> Sign Up/Login </a></li>
             </ul>
         </nav>
 
