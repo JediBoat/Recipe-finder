@@ -89,13 +89,13 @@ else
 if(empty($useraccount))
 {   
 
-    $linkaddress = "../main/signinpage.html"
+    $linkaddress = "../main/signinpage.html";
     $linkname = "Sign Up/Login";
 
 }
 else
 {   
-    $linkaddress = "../PHP/accountpage.inc.php"
+    $linkaddress = "../PHP/accountpage.inc.php";
 
     $displayname = $useraccount["Username"];
     $displayemail = $useraccount["Email"];
