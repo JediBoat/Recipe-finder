@@ -53,7 +53,7 @@ else
         $instruction_string = ($result["instructions"]);//need wait for html then adjust it
         $ingredients_string = ($result["ingredients"]);
         $dietaries_string = ($result["dietaries"]);
-        //echo ($result["links"]);
+        $photoofrecipie = ($result["links"]);
        
     }
     
@@ -127,28 +127,33 @@ else
             </div>
     </header>
 
+    <section class="name-container">  
+            <div class="name-container"> 
+                <p class="nameof - item"> <?php echo $name_string; ?></p>
+            </div>    
+    </section>
+
+    <section class="photo-container">  
+            <div class="photo-container"> 
+                <?php echo "<img class='recipe-img' src='../Recipie images/$photoofrecipie'>" ?>
+            </div>    
+    </section>
+
     <section class="instructions-container">  
             <div class="instructions-container"> 
-                <ul class="instructions-container">
-                    <p class="instructions-item"> <?php foreach ($InstructionArray as $Instruction) { echo $Instruction . "<br>"; } ?></p>
-
-                </ul>
+                <p class="instructions-item"> <?php foreach ($InstructionArray as $Instruction) { echo $Instruction . "<br>"; } ?></p>
             </div>    
     </section>
 
     <section class="ingrd_container">  
             <div class="ingrd-container"> 
-                <ul class="ingrd-list-container">
                    <p class="ingrd-item"> <?php foreach ($IngredientArray as $Ingredient) { echo $Ingredient . "<br>"; } ?></p>
-                </ul>
             </div>
     </section>
 
     <section class="dietaries_container">  
             <div class="dietaries-container"> 
-                <ul class="dietaries-list-container">
                    <p class="dietaries-item"> <?php foreach ($DietariesArray as $Dietaries) { echo $Dietaries; } ?></p>
-                </ul>
             </div>
     </section>
 
