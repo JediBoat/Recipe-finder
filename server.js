@@ -38,3 +38,31 @@ app.post('/add-recipe', (req, res) => {
 app.listen(7000, () => {
     console.log('Server running at http://localhost:7000');
 });
+
+
+// for account based server requests
+
+let accountId = 1;
+
+app.post('/register-account', (req, res) => {
+    console.log("POST /register-account received");
+    console.log("Account Data:", req.body);
+
+    const account = {
+        AccountId: accountId++,
+        ...req.body
+    };
+
+    const filePath = path.join(__dirname, `account${account.AccountId}.json`);
+
+    fs.writeFile(filePath, JSON.stringify(account, null, 2), (err) => {
+        if (err) {
+            console.error('Error saving account file:', err);
+            return res.status(500).json({ message: 'Failed to save account' });
+        }
+
+        console.log('✅ Account saved to:', filePath);
+        res.json({ message: 'Account saved', id: account.AccountId });
+    });
+});
+
