@@ -241,4 +241,65 @@ header {
     background-color: white;
 }
 
+/* Recipe page */
 
+.reciperesults {
+    margin: auto;
+    margin-top: 35px;
+    width: 80%;
+    background-color: #E9F2EA;
+    border-radius: 15px;
+}
+
+.photo-ingredient-container {
+    display: flex;
+    gap: 3%;
+    
+    width: 95%;
+    margin: auto;
+    padding-bottom: 25px;
+    padding-top: 15px;
+}
+
+.photo-container img {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+}
+
+.nameof-item {
+    text-align: center;
+    font-size: 25px;
+    padding-top: 15px;
+    text-decoration: underline;
+}
+
+
+.ingrd-header {
+    margin: 0;
+}
+
+.ingrd-item {
+    max-height: 400px;
+    column-fill: auto;
+    columns: 2;
+}
+
+.dietaries-item {
+    text-align: center;
+    padding-bottom: 10px;
+    font-size: 15px;
+}
+
+.instructions-container {
+    padding-bottom: 10px;
+}
+
+.instructions-header {
+    text-align: center;
+}
+
+.instructions-item {
+    margin: auto;
+    max-width: 95%;
+}

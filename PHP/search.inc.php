@@ -127,34 +127,41 @@ else
             </div>
     </header>
 
+    <section class="reciperesults">
     <section class="name-container">  
             <div class="name-container"> 
-                <p class="nameof - item"> <?php echo $name_string; ?></p>
+                <h1 class="nameof-item"> <?php echo $name_string; ?></h1>
             </div>    
     </section>
 
+    <section class="dietaries_container">  
+            <div class="dietaries-container">
+                   <p class="dietaries-item">This recipe is suitable for the following dietary groups: <?php foreach ($DietariesArray as $Dietaries) { echo $Dietaries; } ?></p>
+            </div>
+    </section>
+
+    <section class="photo-ingredient-container">
     <section class="photo-container">  
             <div class="photo-container"> 
                 <?php echo "<img class='recipe-img' src='../Recipie images/$photoofrecipie'>" ?>
             </div>    
     </section>
 
+    <section class="ingrd_container">  
+            <div class="ingrd-container"> 
+                <h2 class="ingrd-header">Required Ingredients:</h2>
+                   <p class="ingrd-item"> <?php foreach ($IngredientArray as $Ingredient) { echo $Ingredient . "<br><br>"; } ?></p>
+            </div>
+    </section>
+    </section>
+
     <section class="instructions-container">  
             <div class="instructions-container"> 
-                <p class="instructions-item"> <?php foreach ($InstructionArray as $Instruction) { echo $Instruction . "<br>"; } ?></p>
+                <h2 class="instructions-header">Instructions:</h2>
+                <p class="instructions-item"> <?php foreach ($InstructionArray as $Instruction) { echo $Instruction . "<br><br>"; } ?></p>
             </div>    
     </section>
 
-    <section class="ingrd_container">  
-            <div class="ingrd-container"> 
-                   <p class="ingrd-item"> <?php foreach ($IngredientArray as $Ingredient) { echo $Ingredient . "<br>"; } ?></p>
-            </div>
-    </section>
-
-    <section class="dietaries_container">  
-            <div class="dietaries-container"> 
-                   <p class="dietaries-item"> <?php foreach ($DietariesArray as $Dietaries) { echo $Dietaries; } ?></p>
-            </div>
     </section>
 
 
