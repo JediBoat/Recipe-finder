@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             alert("Account saved!");
             console.log(data);
+            window.location.replace('http://localhost:3000/PHP/adduser.inc.php');
         })
         .catch(error => {
             console.error('Error saving account:', error);

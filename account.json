@@ -1,0 +1,10 @@
+{
+  "AccountId": 1,
+  "username": "jed",
+  "email": "jediboat6@gmail.com",
+  "password": "cool",
+  "confirmPassword": "cool",
+  "firstname": "Jedidiah",
+  "secondname": "Boateng",
+  "age": "20"
+}

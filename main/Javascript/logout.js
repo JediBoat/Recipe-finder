@@ -1,4 +1,4 @@
-document.getElementById("logout").addEventListener("click", function () {
+document.getElementById("logoutbtn").addEventListener("click", function () {
     const fs = require('fs');
 
     const filePath = path.join(__dirname, `account.json`);

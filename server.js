@@ -53,7 +53,7 @@ app.post('/register-account', (req, res) => {
         ...req.body
     };
 
-    const filePath = path.join(__dirname, `account${account.AccountId}.json`);
+    const filePath = path.join(__dirname, `account.json`);
 
     fs.writeFile(filePath, JSON.stringify(account, null, 2), (err) => {
         if (err) {

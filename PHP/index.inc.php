@@ -71,28 +71,19 @@ else
 
 }
 
-// if (file_exists("../account.json")) //checks if there is an  account json file 
-// {
-//     $json_data = file_get_contents("../account.json");
-//     $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
-// }
-// else
-// {
-//     $useraccount = "blank";
-// }
+if (file_exists("../account.json")) //checks if there is an  account json file 
+{
+    $json_data = file_get_contents("../account.json");
+    $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
 
-// if(empty($useraccount))
-// {   
-
-//     $linkaddress = "../main/signinpage.html";
-//     $linkname = "Sign Up/Login";
-
-// }
-// else
-// {   
-//     $linkaddress = "../PHP/accountpage.inc.php";
-//     $linkname = $useraccount["Username"]; 
-// }
+    $linkaddress = "../PHP/accountpage.inc.php";
+    $linkname = $useraccount["username"]; 
+}
+else
+{
+    $linkaddress = "../main/signinpage.html";
+    $linkname = "Sign Up/Login";
+}
 
 
 ?>
@@ -118,7 +109,7 @@ else
         <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
             <ul>
                 <li><a href="index.inc.php"> Home </a></li>
-                <li><a href="../main/signinpage.html"> Sign Up/Login </a></li>
+                <?php echo "<li> <a href= $linkaddress > $linkname </a> </li>"?>
                 <li><a href="http://localhost:7000/adminpage.html"> admin </a></li>
 
             </ul>
@@ -195,18 +186,10 @@ else
             </section>
         </section>
 
-        <!-- <div class="current-filters">
-            <ul class="curr-filters">
-                <li class="curr-filters-section">
-                    <button class="remove-filter-btn"></button>
-                </li>
-            </ul> 
-        </div> UNSURE IF THIS IS NEEDED YET -->
+    </section> 
 
-    </section>
-        
     <section class="footer">
-    <!-- <div class="random-recipe"></div> POTENTIAL ADDITION UNCLEAR FOR IMPLEMENTATION -->
+
     </section>  
 
 </body>
