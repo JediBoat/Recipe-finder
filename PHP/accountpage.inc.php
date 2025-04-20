@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")//runs only if there is a post request
 
     if(empty($results))
     {
-        header("index.inc.php");
+        header("Location: ../main/signinpage.html");
     }
     else
     {
@@ -56,14 +56,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")//runs only if there is a post request
 
         $path = dirname(__FILE__)."/currentaccount.json";
         $jsonData = [
-                        [
+                        
                             "AccountID" =>  $acountID,
                             "Username" => $username,
                             "Email" => $email,
                             "Firstname" => $firstname,
                             "Secondname" => $secondname,
                             "Age" => $age
-                        ]
+                        
                     ];
 
                     $jsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
@@ -77,9 +77,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")//runs only if there is a post request
 }
 
 
-if (file_exists("../currentaccount.json")) //checks if there is an  account json file 
+if (file_exists("currentaccount.json")) //checks if there is an  account json file 
 {
-    $json_data = file_get_contents("../currentaccount.json");
+    $json_data = file_get_contents("currentaccount.json");
     $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
 
     $displayname = $useraccount["Username"];
@@ -157,7 +157,7 @@ else
                 <p id="phone" class="info-text"></p>
             </div>
             
-            <button type="submit" id="logoutbtn" class="logoutbtn" ><a href="../main/signinpage.html"> Logout </a></button>
+            <button type="submit" id="logoutbtn" class="logoutbtn" ><a href="../PHP/filedelete.inc.php"> Logout </a></button>
             <p class="delete-link">Want to delete your account?<a href="../main/delaccountpage.html"> Click here</a></p>
         </form>
     </section>

@@ -71,13 +71,13 @@ else
 
 }
 
-if (file_exists("../account.json")) //checks if there is an  account json file 
+if (file_exists("currentaccount.json")) //checks if there is an  account json file 
 {
-    $json_data = file_get_contents("../account.json");
+    $json_data = file_get_contents("currentaccount.json");
     $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
 
     $linkaddress = "../PHP/accountpage.inc.php";
-    $linkname = $useraccount["username"]; 
+    $linkname = $useraccount["Username"]; 
 }
 else
 {
