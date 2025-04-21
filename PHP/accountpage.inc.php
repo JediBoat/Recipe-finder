@@ -4,8 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")//runs only if there is a post request
     
     $email = $_POST["email"];//replace with form variable
     $pwd = $_POST["password"];
-   
-
+    $admin = false;
 
     try 
     {
@@ -24,6 +23,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")//runs only if there is a post request
 
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
         
+        if (file_exists("currentaccount.json"))
+        {
+            $json_data = file_get_contents("currentaccount.json");
+            $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+            $name = $useraccount["Username"];
+            $id = $useraccount["AccountID"];
+            $adminquery = "SELECT * FROM Admins WHERE username = '$name' AND acountID = '$id';";// selects all the data that matches 
+            $adstatement = $pdo->prepare($adminquery);
+            $adstatement->execute();//submit data from user
+            $adresults = $adstatement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
+            $admin = True;
+        }
 
         $pdo = null;//closing of connection to database
         $statement = null;
@@ -75,6 +86,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")//runs only if there is a post request
         
     }
 }
+else if(file_exists("currentaccount.json"))
+{
+    if (file_exists("currentaccount.json"))
+    {
+        try
+        {
+            require_once("dbapi.inc.php");//links file connects to the database
+            $json_data = file_get_contents("currentaccount.json");
+            $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+            $name = $useraccount["Username"];
+            $id = $useraccount["AccountID"];
+            $adminquery = "SELECT * FROM Admins WHERE username = '$name' AND acountID = '$id';";// selects all the data that matches 
+            $adstatement = $pdo->prepare($adminquery);
+            $adstatement->execute();//submit data from user
+            $adresults = $adstatement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
+            $admin = True;
+        } 
+        catch (PDOException $e) 
+        {
+            die(" Failed ". $e->getMessage());//it it fails it just terminates the script
+            
+        }
+    }
+
+    $pdo = null;//closing of connection to database
+    $statement = null;
+}
 
 
 
@@ -100,6 +138,7 @@ else
     $displaysecondn = "";
     $displayemail = "";
     $displayage = "";
+    $admin = false;
 }
 
 
@@ -128,6 +167,7 @@ else
             <ul>
                 <li><a href="index.inc.php"> Home </a></li>
                 <?php echo "<li> <a href= $linkaddress > $linkname </a> </li>"?>
+                <?php if ($admin) {echo "<li><a href='http://localhost:7000/adminpage.html'> admin </a></li>";}?>
             </ul>
         </nav>
 
