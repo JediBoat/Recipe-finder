@@ -88,27 +88,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")//runs only if there is a post request
 }
 else if(file_exists("currentaccount.json"))
 {
-    if (file_exists("currentaccount.json"))
+   
+    try
     {
-        try
+        require_once("dbapi.inc.php");//links file connects to the database
+
+        $json_data = file_get_contents("currentaccount.json");
+        $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+
+        $name = $useraccount["Username"];
+        $id = $useraccount["AccountID"];
+
+        $adminquery = "SELECT * FROM Admins WHERE username = '$name' AND acountID = '$id';";// selects all the data that matches 
+
+        $adstatement = $pdo->prepare($adminquery);
+
+        $adstatement->execute();//submit data from user
+        
+        $adresults = $adstatement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
+
+        if(empty($adresults))// for getting the right information out
         {
-            require_once("dbapi.inc.php");//links file connects to the database
-            $json_data = file_get_contents("currentaccount.json");
-            $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
-            $name = $useraccount["Username"];
-            $id = $useraccount["AccountID"];
-            $adminquery = "SELECT * FROM Admins WHERE username = '$name' AND acountID = '$id';";// selects all the data that matches 
-            $adstatement = $pdo->prepare($adminquery);
-            $adstatement->execute();//submit data from user
-            $adresults = $adstatement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
-            $admin = True;
-        } 
-        catch (PDOException $e) 
-        {
-            die(" Failed ". $e->getMessage());//it it fails it just terminates the script
-            
+            $admin = false;
         }
+        else
+        {
+            $admin = True;
+        }
+    } 
+    catch (PDOException $e) 
+    {
+        die(" Failed ". $e->getMessage());//it it fails it just terminates the script
+        
     }
+    
 
     $pdo = null;//closing of connection to database
     $statement = null;
@@ -203,6 +216,7 @@ else
 
             <button type="submit" id="logoutbtn" class="logoutbtn" ><a href="../PHP/filedelete.inc.php"> Logout </a></button>
             <p class="delete-link">Want to delete your account?<a href="../main/delaccountpage.html"> Click here</a></p>
+            <p class="update-link">Want to update your account?<a href="../main/updateaccount.html"> Click here</a></p>
         </form>
     </section>
 

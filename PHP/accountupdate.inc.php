@@ -1,36 +1,24 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-    $accountid = $_POST["accountID"];
+    $email = $_POST["email"];//replace with form variable
+    $pwd = $_POST["password"];
+
 
     try
     {
         require_once("dbapi.inc.php");//links file connects to the database
 
-        $json_data = file_get_contents("accountupdate.json");
-        $updateaccounts = json_decode($json_data, JSON_OBJECT_AS_ARRAY);//retries json file data turn it into a string an place it in an array
+        $json_data = file_get_contents("currentaccount.json");
+        $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
 
-        $query = "UPDATE Accounts SET username = :username, pwd = :pwd, email = :email, firstname = :firstname, secondname = :secondname WHERE acountID = $accountid;"; //Query for updating tabels
+        $id = $useraccount["AccountID"];
 
-        foreach($updateaccounts as $updateaccount)//goes through the json file retrieved
-        {
-            $username = $accountupdating["username"];//sorts data from json file to appropriate variables
-            $pwd = $accountupdating["pwd"];
-            $email = $accountupdating["email"]; 
-            $firstname = $accountupdating["firstname"];
-            $secondname = $accountupdating["secondname"];
-        }
+        $query = "UPDATE Accounts SET email = :email WHERE acountID = $id AND pwd = '$pwd';"; //Query for updating tabels
 
         $statement = $pdo->prepare($query);
 
-        $statement->bindParam(":username", $username);
-        $statement->bindParam(":pwd", $pwd);
         $statement->bindParam(":email", $email);
-        $statement->bindParam(":firstname", $firstnamee);
-        $statement->bindParam(":secondname", $secondname);
-    
-        
-        
 
 
         $statement->execute();//submit data from user
@@ -38,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $pdo= null;//closing of connection to database
         $statement = null;
 
+        header("Location: filedelete.inc.php");
         die();
     } 
     catch (PDOException $e) 
