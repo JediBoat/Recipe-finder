@@ -1,10 +1,10 @@
 {
   "AccountId": 1,
-  "username": "jed",
-  "email": "jediboat6@gmail.com",
-  "password": "cool",
-  "confirmPassword": "cool",
-  "firstname": "Jedidiah",
-  "secondname": "Boateng",
-  "age": "20"
+  "username": "Wiener",
+  "email": "wiener@normal-user.net",
+  "password": "bad",
+  "confirmPassword": "bad",
+  "firstname": "Wiener",
+  "secondname": "Peter",
+  "age": "56"
 }

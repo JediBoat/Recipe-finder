@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 }
 else 
 {
-    //header("");makes sure the user enter the right detals properly or sends them back to the login page
+    header("index.inc.php");
 }
 
 

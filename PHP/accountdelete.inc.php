@@ -2,18 +2,18 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $email = $_POST["email"];//replace with form variable
-    $pwd= $_POST["pwd"];//replace with form variable
+    $pwd= $_POST["password"];//replace with form variable
 
     try 
     {
-        $json_data = file_get_contents("../account.json");
+        $json_data = file_get_contents("currentaccount.json");
         $accountdata = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
 
         $accountid = $accountdata["AccountID"];
 
         require_once("dbapi.inc.php");//links file connects to the database
 
-        $query = "DELETE FROM email = $email AND pwd = $pwd AND acountID = $accountid;";//deletes user
+        $query = "DELETE FROM Accounts WHERE email = '$email' AND pwd = '$pwd' AND acountID = '$accountid';";//deletes user
 
         $statement = $pdo->prepare($query);
 
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $pdo = null;//closing of connection to database
         $statement = null;
 
-        header("index.inc.php");
+        header("Location: ../PHP/filedelete.inc.php");
         die();
       
         
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 }
 else
 {
-    header("index.inc.php");
+    header("Location: index.inc.php");
 
 }
 

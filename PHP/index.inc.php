@@ -37,11 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         
     }
 }
-else 
-{
-    header("index.inc.php");
-    $recpie = "blank";
-}
+
 
 
 if(empty($results))// for getting the right information out

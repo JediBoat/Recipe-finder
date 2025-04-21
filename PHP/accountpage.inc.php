@@ -77,6 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")//runs only if there is a post request
 }
 
 
+
 if (file_exists("currentaccount.json")) //checks if there is an  account json file 
 {
     $json_data = file_get_contents("currentaccount.json");
@@ -95,6 +96,10 @@ else
 {
     $linkaddress = "../main/signinpage.html";
     $linkname = "Sign Up/Login";
+    $displayfirstn = "";
+    $displaysecondn = "";
+    $displayemail = "";
+    $displayage = "";
 }
 
 
@@ -145,18 +150,18 @@ else
             <h2 class="account-title">Account:</h2>
 
             <div class="info-group">
-                <label for="fullname">Name:</label>
+                <label for="fullname">Name: <?php echo $displayfirstn," ",$displaysecondn ; ?></label>
                 <p id="firstname" class="info-text"></p> <p id="secondname" class="info-text"></p>
             </div>
             <div class="info-group">
-                <label for="email">Email:</label>
+                <label for="email">Email: <?php echo $displayemail; ?></label>
                 <p id="email" class="info-text"></p>
             </div>
             <div class="info-group">
-                <label for="phone">Phone Number:</label>
+                <label for="age">Age: <?php echo $displayage; ?></label>
                 <p id="phone" class="info-text"></p>
             </div>
-            
+
             <button type="submit" id="logoutbtn" class="logoutbtn" ><a href="../PHP/filedelete.inc.php"> Logout </a></button>
             <p class="delete-link">Want to delete your account?<a href="../main/delaccountpage.html"> Click here</a></p>
         </form>
