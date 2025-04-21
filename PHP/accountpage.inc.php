@@ -133,11 +133,10 @@ else
 
         <div class="searchbar-container"> <!-- Search bar container and classes unsure what else may be needed for the future functionality but ive added what I think is necessary-->
             <div class="search-bar">
-                <form class="search-form">
+                <form class="search-form" method="post" action="index.inc.php">
                     <p class="search-title">Search Recipes:</p>
                     <input type="text" id="recipe" name="recipe" class="search-input-field" placeholder="Search Recipes.." required>
-                    <button type="submit" class="search-btn">
-                        <i class="fa fa-search"></i>
+                    <button type="submit" class="search-btn"><i class="fa fa-search"></i>
                     </button>
                 </form>
             </div>
