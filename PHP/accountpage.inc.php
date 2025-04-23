@@ -214,9 +214,30 @@ else
                 <p id="phone" class="info-text"></p>
             </div>
 
+            <div class="input-group">
+                <input type="email" id="email" name="email" class="input-field" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="pwd" class="input-field" placeholder="Password" required>
+            </div>
             <button type="submit" id="logoutbtn" class="logoutbtn" ><a href="../PHP/filedelete.inc.php"> Logout </a></button>
             <p class="delete-link">Want to delete your account?<a href="../main/delaccountpage.html"> Click here</a></p>
-            <p class="update-link">Want to update your account?<a href="../main/updateaccount.html"> Click here</a></p>
+        </form>
+
+        <form class="account-form" id="accountForm" method="post" action="accountupdate.inc.php">
+            <h2 class="account-title">Update Account Info</h2>
+        
+            <div class="info-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" class="input-field" placeholder="Enter new username" required>
+            </div>
+        
+            <div class="info-group">
+                <label for="new-password">New Password:</label>
+                <input type="password" id="new-password" class="input-field" placeholder="Enter new password" required>
+            </div>
+        
+            <button type="submit" class="updatebtn">Update</button>
         </form>
     </section>
 

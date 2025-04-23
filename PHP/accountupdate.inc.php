@@ -1,8 +1,8 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-    $email = $_POST["email"];//replace with form variable
-    $pwd = $_POST["password"];
+    $new_username = $_POST["username"];//replace with form variable
+    $new_pwd = $_POST["new-password"];
 
 
     try
@@ -13,12 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
 
         $id = $useraccount["AccountID"];
+        $accountemail = $useraccount["Email"];
 
-        $query = "UPDATE Accounts SET email = :email WHERE acountID = $id AND pwd = '$pwd';"; //Query for updating tabels
+        $query = "UPDATE Accounts SET username = :username, pwd = :pwd WHERE acountID = '$id' AND email = '$accountemail';"; //Query for updating tabels
 
         $statement = $pdo->prepare($query);
 
-        $statement->bindParam(":email", $email);
+        $statement->bindParam(":email", $new_username);
+        $statement->bindParam(":pwd", $new_pwd);
 
 
         $statement->execute();//submit data from user
