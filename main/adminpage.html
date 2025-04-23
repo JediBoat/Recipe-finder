@@ -39,9 +39,26 @@
         <div class="admin-form-row">
         <label for="recipeMethodBox">Instructions:</label><input type="text" id="recipeMethodBox"><br><br>
         </div>
-        <div class="admin-form-row">
-        <label for="recipeIngredientsBox">Ingredients:</label><input type="text" id="recipeIngredientsBox"><br><br>
-        </div>
+
+        <div class="ingredient-inputs">
+            <label for="ingredientName">Ingredient Name:</label>
+            <input type="text" id="ingredientName" class="input-field" placeholder="e.g., Sugar" required>
+        
+            <label for="ingredientQuantity">Quantity:</label>
+            <input type="number" id="ingredientQuantity" class="input-field" placeholder="e.g., 100" required>
+        
+            <label for="ingredientType">Type:</label>
+            <select id="ingredientType" class="input-field" required>
+              <option value="g">Solid (g)</option>
+              <option value="ml">Liquid (ml)</option>
+              <option value="pcs">Countable (pcs)</option>
+            </select>
+        
+            <button type="button" onclick="addIngredient()" class="submit-btn">Add Ingredient</button>
+        
+            <ul id="ingredientList"></ul>
+          </div>
+
         <div class="admin-form-row">
         <label for="recipeDietariesBox">Dietary:</label><input type="text" id="recipeDietariesBox"><br><br>
         </div>
@@ -49,6 +66,7 @@
         <label for="recipeLinksBox">Link:</label><input type="text" id="recipeLinksBox"><br><br>
         </div>
         <button type="button" id="addRecipeButton"><i class="fa fa-plus"></i> Add Recipe</button>
+
     </form>
     </section>
 

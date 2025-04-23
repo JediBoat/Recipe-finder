@@ -3,8 +3,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
      $recpie = $_POST["recipe"];//replace with form variable
-
-    
+     $admin = false;
 
     try 
     {
@@ -23,6 +22,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
         
+        if (file_exists("currentaccount.json"))
+        {
+            $json_data = file_get_contents("currentaccount.json");
+            $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+            $name = $useraccount["Username"];
+            $id = $useraccount["AccountID"];
+            $adminquery = "SELECT * FROM Admins WHERE username = '$name' AND acountID = '$id';";// selects all the data that matches 
+            $adstatement = $pdo->prepare($adminquery);
+            $adstatement->execute();//submit data from user
+            $adresults = $adstatement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
+
+            if(empty($adresults))// for getting the right information out
+            {
+                $admin = false;
+            }
+            else
+            {
+                $admin = True;
+            }
+        }
 
         $pdo = null;//closing of connection to database
         $statement = null;
@@ -37,11 +56,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         
     }
 }
-else 
+else if(file_exists("currentaccount.json"))
 {
-    header("index.inc.php");
-    $recpie = "blank";
+    try
+    {
+        require_once("dbapi.inc.php");//links file connects to the database
+
+        $json_data = file_get_contents("currentaccount.json");
+        $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+
+        $name = $useraccount["Username"];
+        $id = $useraccount["AccountID"];
+
+        $adminquery = "SELECT * FROM Admins WHERE username = '$name' AND acountID = '$id';";// selects all the data that matches 
+
+        $adstatement = $pdo->prepare($adminquery);
+
+        $adstatement->execute();//submit data from user
+
+        $adresults = $adstatement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
+
+        if(empty($adresults))// for getting the right information out
+        {
+            $admin = false;
+        }
+        else
+        {
+            $admin = True;
+        }
+    } 
+    catch (PDOException $e) 
+    {
+        die(" Failed ". $e->getMessage());//it it fails it just terminates the script
+        
+    }
+    
+
+    $pdo = null;//closing of connection to database
+    $statement = null;
 }
+
 
 
 if(empty($results))// for getting the right information out
@@ -71,26 +125,19 @@ else
 
 }
 
-if (file_exists("../account.json")) //checks if there is an  account json file 
+if (file_exists("currentaccount.json")) //checks if there is an  account json file 
 {
-    $json_data = file_get_contents("../account.json");
+    $json_data = file_get_contents("currentaccount.json");
     $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+
+    $linkaddress = "../PHP/accountpage.inc.php";
+    $linkname = $useraccount["Username"]; 
 }
 else
 {
-    $useraccount = "blank";
-}
-
-if(empty($useraccount))
-{   
-    $linkaddress = "../PHP/accountpage.inc.php"
-    $linkname = $useraccount["Username"];
-}
-else
-{   
-    $linkaddress = "../main/signinpage.html"
+    $linkaddress = "../main/signinpage.html";
     $linkname = "Sign Up/Login";
-    
+    $admin = false;
 }
 
 
@@ -117,8 +164,8 @@ else
         <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
             <ul>
                 <li><a href="index.inc.php"> Home </a></li>
-                <li><a href="<?php echo $linkaddress;?>"> <?php echo $linkname; ?> </a></li>
-                <li><a href="http://localhost:7000/adminpage.html"> admin </a></li>
+                <?php echo "<li> <a href= $linkaddress > $linkname </a> </li>"?>
+                <?php if ($admin) {echo "<li><a href='http://localhost:7000/adminpage.html'> admin </a></li>";}?>
 
             </ul>
         </nav>
@@ -157,7 +204,8 @@ else
         </section>
 
         <section> <!-- Recipes container and classes -->
-                    <p> <?php  $j = 0; 
+            <section class='recipes-container'>
+                     <?php  $j = 0; 
                         if(empty($recpieresults))
                         {
                             echo "<p class = 'whatever'> No Recipies found </p>";
@@ -171,40 +219,32 @@ else
                                     $value3 = $recpieresults[$j + 2];
                                     $value4 = $recpieresults[$j + 3];
 
-                                    echo " <section class='recipes-container'>
-                                                <ul class='recipe-list-container'>
-                                                    <li class='recipe-section'>
-                                                        <img src='../Recipie images/$value4'width='200' height='150'>
-                                                        <p class = 'whatever'> $value2 </p>
-                                                        <p class = 'whatever'> $value3 </p>
-                                                        <form action='search.inc.php' method='post'>  
-                                                            <input hidden type='number' name= 'recipieID' value='$value1'> 
-                                                            <input hidden type='text' name='recipe' value='$value2'> 
-                                                            <input type='submit' value='Please click here to access recipie'>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </section>";
+                                    echo " 
+                                         <ul class='recipe-list-container'>
+                                            <li class='recipe-section'>
+                                                <img class='recipe-img' src='../Recipie images/$value4'>
+                                                    <p class = 'whatever'> $value2 </p>
+                                                    <p class = 'whatever'> $value3 </p>
+                                                    <form action='search.inc.php' method='post'>  
+                                                        <input hidden type='number' name= 'recipieID' value='$value1'> 
+                                                        <input hidden type='text' name='recipe' value='$value2'> 
+                                                        <input type='submit' value='View recipe'>
+                                                    </form>
+                                                </li>
+                                            </ul>";
                                     $j = $j + 4;
                                     
                                 }
                         }
                         ?>
-                    </p>
+                    
+            </section>
         </section>
 
-        <!-- <div class="current-filters">
-            <ul class="curr-filters">
-                <li class="curr-filters-section">
-                    <button class="remove-filter-btn"></button>
-                </li>
-            </ul> 
-        </div> UNSURE IF THIS IS NEEDED YET -->
+    </section> 
 
-    </section>
-        
     <section class="footer">
-    <!-- <div class="random-recipe"></div> POTENTIAL ADDITION UNCLEAR FOR IMPLEMENTATION -->
+
     </section>  
 
 </body>

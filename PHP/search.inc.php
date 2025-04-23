@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $recpie = $_POST["recipe"];//replace with form variable
     $recpieID = $_POST["recipieID"];//replace with form variable
-    
+    $admin = false;
 
     try 
     {
@@ -22,6 +22,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         
 
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
+
+        if (file_exists("currentaccount.json"))
+        {
+            $json_data = file_get_contents("currentaccount.json");
+            $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+            $name = $useraccount["Username"];
+            $id = $useraccount["AccountID"];
+            $adminquery = "SELECT * FROM Admins WHERE username = '$name' AND acountID = '$id';";// selects all the data that matches 
+            $adstatement = $pdo->prepare($adminquery);
+            $adstatement->execute();//submit data from user
+            $adresults = $adstatement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
+
+            if(empty($adresults))// for getting the right information out
+            {
+                $admin = false;
+            }
+            else
+            {
+                $admin = True;
+            }
+        }
         
 
         $pdo = null;//closing of connection to database
@@ -35,9 +56,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         
     }
 }
-else 
+else if(file_exists("currentaccount.json"))
 {
-    //header("");makes sure the user enter the right detals properly or sends them back to the login page
+
+    try
+    {
+        require_once("dbapi.inc.php");//links file connects to the database
+        $json_data = file_get_contents("currentaccount.json");
+
+        $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+
+        $name = $useraccount["Username"];
+        $id = $useraccount["AccountID"];
+
+        $adminquery = "SELECT * FROM Admins WHERE username = '$name' AND acountID = '$id';";// selects all the data that matches 
+
+        $adstatement = $pdo->prepare($adminquery);
+
+        $adstatement->execute();//submit data from user
+
+        $adresults = $adstatement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
+
+        if(empty($adresults))// for getting the right information out
+        {
+            $admin = false;
+        }
+        else
+        {
+            $admin = True;
+        }
+    } 
+    catch (PDOException $e) 
+    {
+        die(" Failed ". $e->getMessage());//it it fails it just terminates the script
+        
+    }
+
+    $pdo = null;//closing of connection to database
+    $statement = null;
 }
 
 
@@ -53,7 +109,7 @@ else
         $instruction_string = ($result["instructions"]);//need wait for html then adjust it
         $ingredients_string = ($result["ingredients"]);
         $dietaries_string = ($result["dietaries"]);
-        //echo ($result["links"]);
+        $photoofrecipie = ($result["links"]);
        
     }
     
@@ -64,26 +120,19 @@ else
 
 }
 
-if (file_exists("../account.json")) //checks if there is an  account json file 
+if (file_exists("currentaccount.json")) //checks if there is an  account json file 
 {
-    $json_data = file_get_contents("../account.json");
+    $json_data = file_get_contents("currentaccount.json");
     $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
+
+    $linkaddress = "../PHP/accountpage.inc.php";
+    $linkname = $useraccount["Username"]; 
 }
 else
 {
-    $useraccount = "blank";
-}
-
-if(empty($useraccount))
-{   
-    $linkaddress = "../PHP/accountpage.inc.php"
-    $linkname = $useraccount["Username"];
-}
-else
-{   
-    $linkaddress = "../main/signinpage.html"
+    $linkaddress = "../main/signinpage.html";
     $linkname = "Sign Up/Login";
-    
+    $admin = false;
 }
 
 ?>
@@ -111,7 +160,8 @@ else
         <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
             <ul>
                 <li><a href="index.inc.php"> Home </a></li>
-                <li><a href="<?php echo $linkaddress;?>"> <?php echo $linkname; ?> </a></li>
+                <?php echo "<li> <a href= $linkaddress > $linkname </a> </li>"?>
+                <?php if ($admin) {echo "<li><a href='http://localhost:7000/adminpage.html'> admin </a></li>";}?>
             </ul>
         </nav>
 
@@ -126,29 +176,41 @@ else
             </div>
     </header>
 
-    <section class="instructions-container">  
-            <div class="instructions-container"> 
-                <ul class="instructions-container">
-                    <p class="instructions-item"> <?php foreach ($InstructionArray as $Instruction) { echo $Instruction . "<br>"; } ?></p>
+    <section class="reciperesults">
+    <section class="name-container">  
+            <div class="name-container"> 
+                <h1 class="nameof-item"> <?php echo $name_string; ?></h1>
+            </div>    
+    </section>
 
-                </ul>
+    <section class="dietaries_container">  
+            <div class="dietaries-container">
+                   <p class="dietaries-item">This recipe is suitable for the following dietary groups: <?php foreach ($DietariesArray as $Dietaries) { echo $Dietaries; } ?></p>
+            </div>
+    </section>
+
+    <section class="photo-ingredient-container">
+    <section class="photo-container">  
+            <div class="photo-container"> 
+                <?php echo "<img class='recipe-img' src='../Recipie images/$photoofrecipie'>" ?>
             </div>    
     </section>
 
     <section class="ingrd_container">  
             <div class="ingrd-container"> 
-                <ul class="ingrd-list-container">
-                   <p class="ingrd-item"> <?php foreach ($IngredientArray as $Ingredient) { echo $Ingredient . "<br>"; } ?></p>
-                </ul>
+                <h2 class="ingrd-header">Required Ingredients:</h2>
+                   <p class="ingrd-item"> <?php foreach ($IngredientArray as $Ingredient) { echo $Ingredient . "<br><br>"; } ?></p>
             </div>
     </section>
+    </section>
 
-    <section class="dietaries_container">  
-            <div class="dietaries-container"> 
-                <ul class="dietaries-list-container">
-                   <p class="dietaries-item"> <?php foreach ($DietariesArray as $Dietaries) { echo $Dietaries; } ?></p>
-                </ul>
-            </div>
+    <section class="instructions-container">  
+            <div class="instructions-container"> 
+                <h2 class="instructions-header">Instructions:</h2>
+                <p class="instructions-item"> <?php foreach ($InstructionArray as $Instruction) { echo $Instruction . "<br><br>"; } ?></p>
+            </div>    
+    </section>
+
     </section>
 
 

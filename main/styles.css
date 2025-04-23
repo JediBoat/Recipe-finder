@@ -70,6 +70,48 @@ header {
 .container {
     display: flex;
     height: 100vh;
+    width: 100%;
+    list-style: none;
+}
+
+/* index recipe display (right section) */
+.recipes-container { 
+    width: 75vw;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    row-gap: 3px;
+    margin-right: 20px;
+}
+
+.recipe-list-container {
+    flex-grow: 1;
+    grid-template-rows: auto;
+    height: 90%;
+
+}
+
+.recipe-section {
+    list-style: none;
+    background: #E9F2EA;
+    text-align: center;
+    padding-top: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 100%;
+    height: 100%;
+}
+
+.recipe-img {
+    width: 80%;
+    height: 65% 
+}
+
+.add-recipe-btn {
+    border-radius: 10px;
+    border-width: 1px;
+    cursor: pointer;
+    font-size: 13px;
 }
 
 /* index side bar (left section) */
@@ -87,34 +129,6 @@ header {
     border: none;
     cursor: pointer;
     font-size: 12px;
-}
-
-/* index recipe display (right section) */
-.recipes-container { 
-    display: flex;
-    width: 75%;
-}
-
-.recipe-list-container {
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    gap: 5px;
-    max-height: 250px;
-}
-
-.recipe-section {
-    list-style: none;
-    background: #E9F2EA;
-    text-align: center;
-}
-
-.add-recipe-btn {
-    border-radius: 10px;
-    border-width: 1px;
-    cursor: pointer;
-    font-size: 13px;
 }
 
 /* sign in and up, account and account deletion pages */
@@ -227,4 +241,65 @@ header {
     background-color: white;
 }
 
+/* Recipe page */
 
+.reciperesults {
+    margin: auto;
+    margin-top: 35px;
+    width: 80%;
+    background-color: #E9F2EA;
+    border-radius: 15px;
+}
+
+.photo-ingredient-container {
+    display: flex;
+    gap: 3%;
+    
+    width: 95%;
+    margin: auto;
+    padding-bottom: 25px;
+    padding-top: 15px;
+}
+
+.photo-container img {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+}
+
+.nameof-item {
+    text-align: center;
+    font-size: 25px;
+    padding-top: 15px;
+    text-decoration: underline;
+}
+
+
+.ingrd-header {
+    margin: 0;
+}
+
+.ingrd-item {
+    max-height: 400px;
+    column-fill: auto;
+    columns: 2;
+}
+
+.dietaries-item {
+    text-align: center;
+    padding-bottom: 10px;
+    font-size: 15px;
+}
+
+.instructions-container {
+    padding-bottom: 10px;
+}
+
+.instructions-header {
+    text-align: center;
+}
+
+.instructions-item {
+    margin: auto;
+    max-width: 95%;
+}

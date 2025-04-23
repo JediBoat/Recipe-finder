@@ -18,14 +18,14 @@
 
         <nav class="menu-bar"> <!-- Menu bar for responsive and standard layout more may need to be added -->
             <ul>
-                <li><a href="index.html"> Home </a></li>
+                <li><a href="../PHP/index.inc.php"> Home </a></li>
                 <li><a href="signinpage.html"> Logout </a></li>
             </ul>
         </nav>
 
         <div class="searchbar-container"> <!-- Search bar container and classes unsure what else may be needed for the future functionality but ive added what I think is necessary-->
             <div class="search-bar">
-                <form class="search-form">
+                <form class="search-form" method="post" action="../PHP/index.inc.php">
                     <p class="search-title">Search Recipes:</p>
                     <input type="text" id="recipe" name="recipe" class="search-input-field" placeholder="Search Recipes.." required>
                     <button type="submit" class="search-btn">
@@ -38,19 +38,19 @@
 
     <section class="accontainer">
 
-        <form class="delete-form">
+        <form class="delete-form" method="post" action="../PHP/accountdelete.inc.php">
             <h2 class="delete-title">Account Termination:</h2> <!-- Form for the sign in page, classes and functionality are accessible -->
             
             <div class="input-group">
                 <input type="email" id="email" name="email" class="input-field" placeholder="Email" required>
             </div>
             <div class="input-group">
-                <input type="password" id="password" class="input-field" placeholder="Password" required>
+                <input type="password" id="password" name="password" class="input-field" placeholder="Password" required>
             </div>  
             <button type="submit" class="submit-btn">Terminate</button>
             
             <p> Account termination is <strong>PERMANENT</strong>.</p>
-            <a href="index.html">Click here to CANCEL</a>
+            <a href="../PHP/accountpage.inc.php">Click here to CANCEL</a>
 
         </form>
 

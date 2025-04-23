@@ -1,0 +1,17 @@
+{
+  "RecipeId": 2,
+  "RecipeName": "",
+  "RecipeMethod": "",
+  "RecipeDietaries": "",
+  "RecipeLinks": "",
+  "Ingredients": [
+    {
+      "name": "",
+      "amount": "g"
+    },
+    {
+      "name": "",
+      "amount": "g"
+    }
+  ]
+}
