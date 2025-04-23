@@ -1,49 +1,78 @@
 const express = require('express');
-const fs = require('fs');
 const path = require('path');
+const mysql = require('mysql');
+const { SolidIngredient, LiquidIngredient, CountableIngredient } = require('./main/Javascript/Ingredients');
 
 const app = express();
 app.use(express.json());
 
-// Serve everything from /public folder
+// serve static files from /main
 app.use(express.static(path.join(__dirname, 'main')));
 
-// Serve index/admin page
+// serve admin page
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'main', 'adminpage.html'));
 });
 
-let recipeId = 1;
+// connect to MySQL database using required credentials
+const db = mysql.createConnection({ 
+    host: 'sql8.freesqldatabase.com',
+    user: 'sql8768869',
+    password: 'jICFgdSB17',
+    database: 'sql8768869' 
+});
 
+// error handling for connection to database
+db.connect((err) => { 
+    if (err) {
+        console.error('Database connection error:', err);
+    } else {
+        console.log('Connected to MySQL database');
+    }
+});
+
+// handle adding a recipe to MySQL
 app.post('/add-recipe', (req, res) => {
     console.log("POST /add-recipe received");
-    console.log("Request body:", req.body);
+    const { RecipeName, RecipeMethod, RecipeDietaries, RecipeLinks, Ingredients } = req.body;
 
-    const recipe = {
-        RecipeId: recipeId++,
-        ...req.body
-    };
+    // format ingredients into a single string: "200g Flour, 100ml Milk, 2pcs Eggs" using .map function
+    const formattedIngredients = Ingredients.map(ing => {
+        let unit = '';
+        if (ing.type === 'solid') unit = 'g';
+        else if (ing.type === 'liquid') unit = 'ml';
+        else if (ing.type === 'countable') unit = 'pcs';
 
-    const filePath = path.join(__dirname, `recipe.json`);
-    fs.writeFile(filePath, JSON.stringify(recipe, null, 2), (err) => {
+        return `${ing.quantity}${unit} ${ing.name}`;
+    }).join(', ');
+
+    // sql query that will be used to insert into the database
+    const sql = `
+        INSERT INTO Recipes (recipename, instructions, ingredients, dietaries, links)
+        VALUES (?, ?, ?, ?, ?)
+    `;
+
+    const values = [
+        RecipeName,
+        RecipeMethod,
+        formattedIngredients,
+        RecipeDietaries,
+        RecipeLinks
+    ];
+
+    db.query(sql, values, (err, result) => {
         if (err) {
-            console.error('Error writing file:', err);
-            return res.status(500).json({ message: 'Failed to save recipe' });
+            console.error('Failed to save recipe:', err);
+            return res.status(500).json({ message: 'Failed to save recipe to database' });
         }
-        console.log('Recipe written to:', filePath);
-        res.json({ message: 'Recipe saved', id: recipe.RecipeId });
+
+        console.log('Recipe saved with ID:', result.insertId);
+        res.json({ message: 'Recipe saved to database!', id: result.insertId });
     });
 });
 
-app.listen(7000, () => {
-    console.log('Server running at http://localhost:7000');
-});
-
-
-// for account based server requests
-
+// account registration (needs updating to store into sql)
 let accountId = 1;
-
 app.post('/register-account', (req, res) => {
     console.log("POST /register-account received");
     console.log("Account Data:", req.body);
@@ -55,14 +84,18 @@ app.post('/register-account', (req, res) => {
 
     const filePath = path.join(__dirname, `account.json`);
 
-    fs.writeFile(filePath, JSON.stringify(account, null, 2), (err) => {
+    require('fs').writeFile(filePath, JSON.stringify(account, null, 2), (err) => {
         if (err) {
             console.error('Error saving account file:', err);
             return res.status(500).json({ message: 'Failed to save account' });
         }
 
-        console.log('✅ Account saved to:', filePath);
+        console.log('Account saved to:', filePath);
         res.json({ message: 'Account saved', id: account.AccountId });
     });
+});
+
+app.listen(7000, () => {
+    console.log('Server running at http://localhost:7000');
 });
 

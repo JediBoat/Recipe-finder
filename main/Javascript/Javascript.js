@@ -1,64 +1,57 @@
+let ingredientArray = []; // to store multiple ingredients
+
+function addIngredient() { 
+    const name = document.getElementById('ingredientName').value;
+    const quantity = document.getElementById('ingredientQuantity').value;
+    const type = document.getElementById('ingredientType').value;
+
+    ingredientArray.push({ name, quantity, type });
+
+    const li = document.createElement('li'); 
+    li.textContent = `${quantity} ${type} of ${name}`;
+    document.getElementById('ingredientList').appendChild(li);
+}
+
+// create a json object of required fields
+// sends post request to server add recipe where it will send to the database
 document.getElementById("addRecipeButton").addEventListener("click", function () {
+    const recipe = {
+        RecipeName: document.getElementById('recipeNameInputBox').value,
+        RecipeMethod: document.getElementById('recipeMethodBox').value,
+        Ingredients: ingredientArray,
+        RecipeDietaries: document.getElementById('recipeDietariesBox').value,
+        RecipeLinks: document.getElementById('recipeLinksBox').value
+    };
 
-	var recipe = { // Javascript object of the full recipe 
-		RecipeName : document.getElementById('recipeNameInputBox').value,
-		RecipeMethod : document.getElementById('recipeMethodBox').value,
-		RecipeIngredients : document.getElementById('recipeIngredientsBox').value, 
-		RecipeDietaries : document.getElementById('recipeDietariesBox').value,
-		RecipeLinks : document.getElementById('recipeLinksBox').value
-	};
-
-	fetch('/add-recipe', { // fetch request to 
+    fetch('/add-recipe', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(recipe)
     })
     .then(response => response.json())
     .then(data => {
-        alert("Recipe added successfully!");
+        alert("Recipe saved!");
         console.log(data);
-        window.location.replace('http://localhost:3000/PHP/addrecpie.inc.php');
     })
     .catch(error => {
         console.error('Error:', error);
     });
 });
 
-//establishing database connection to mySQL database 
-// C:\Users\Your Name>node demo_db_connection.js using terminal to establish database connection 
+const mysql = require('mysql');
 
-// var mysql = require('mysql'); // insert mysql link 
+const db = mysql.createConnection({
+    host: 'sql8.freesqldatabase.com',
+    user: 'sql8768869',
+    password: 'jICFgdSB17',
+    database: 'DishcoveryDatabase'
+});
 
-// var con = mysql.createConnection({  
-
-// 	host : 'sql8.freesqldatabase.com', 
-// 	user: 'sql8768869', 
-// 	password : 'jICFgdSB17' 
-
-// }); 
-
-// Con.connect(function(err) { 
-
-// 	If (err) ; throw err; 
-
-// 	Console.log('Connected!'); 
-
-// }); 
-
-// //Querying the database, it takes a SQL statement as a parameter and returns the result 
-
-// con.connect(function(err) { 
-
-// 	If (err) ; throw err; 
-// 	console.log('Connected');
-
-// con.query(sql, function (err, result) { 
-
-// 	If (err) ; throw err; 
-// 	Console.log('Result: ' + result); 
-
-// });	 
-
-// }); 
+// error handling for database connection
+db.connect((err) => {
+    if (err) {
+        console.error('Database connection failed:', err);
+        return;
+    }
+    console.log('Connected to MySQL database!');
+});

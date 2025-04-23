@@ -1,36 +1,34 @@
 class Ingredient {
-    constructor(quantity) {
-        this.quantity = quantity; // numeric value only
-        this.unit = '';           // defined in sub classes
-    }
-
-    getFormattedQuantity() {
-        return `${this.quantity}${this.unit}`;
+    constructor(name, quantity) {
+        this.name = name;
+        this.quantity = quantity;
+        this.unit = ''; // Default to no unit of measure
     }
 }
 
 class SolidIngredient extends Ingredient {
-    constructor(quantity) {
-        super(quantity);
-        this.unit = 'g'; // grams
+    constructor(name, quantity) {
+        super(name, quantity);
+        this.unit = 'g';
     }
 }
 
 class LiquidIngredient extends Ingredient {
-    constructor(quantity) {
-        super(quantity);
-        this.unit = 'ml'; // milliliters
+    constructor(name, quantity) {
+        super(name, quantity);
+        this.unit = 'ml';
     }
 }
 
-class CountableIngredient extends Ingredient { // eggs
-    constructor(quantity) {
-        super(quantity);
-        this.unit = 'pcs'; // pieces
+class CountableIngredient extends Ingredient {
+    constructor(name, quantity) {
+        super(name, quantity);
+        this.unit = 'pcs';
     }
 }
 
-module.exports = { // so that you can use code from this file in another file in js (using it server.js)
+// allows for the classes to be used in different files
+module.exports = {
     SolidIngredient,
     LiquidIngredient,
     CountableIngredient
