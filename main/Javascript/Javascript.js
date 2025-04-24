@@ -38,7 +38,7 @@ document.getElementById("addRecipeButton").addEventListener("click", function ()
     });
 });
 
-const mysql = require('mysql');
+const mysql = require('mysql');//security flaw I dont think it needs this code plus not on sever can be seen
 
 const db = mysql.createConnection({
     host: 'sql8.freesqldatabase.com',

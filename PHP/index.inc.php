@@ -3,14 +3,44 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
      $recpie = $_POST["recipe"];//replace with form variable
+     $filterchecked = $_POST['formdiet'];
+     $Infilterchecked = $_POST['formdingred'];
      $admin = false;
+
+     if(empty($filterchecked)) 
+     {
+        $Qdietaries = "";
+     } 
+     else 
+     {
+       $N = count($filterchecked);
+
+       for($i=0; $i < $N; $i++)
+       {
+         $Qdietaries .= $filterchecked[$i];
+       }
+     }
+
+     if(empty($Infilterchecked)) 
+     {
+        $QIngredients = "";
+     } 
+     else 
+     {
+       $N = count($Infilterchecked);
+
+       for($i=0; $i < $N; $i++)
+       {
+        $QIngredients .= $Infilterchecked[$i];
+       }
+     }
 
     try 
     {
 
         require_once("dbapi.inc.php");//links file connects to the database
 
-        $query = "SELECT recipeID, recipename, dietaries, links FROM Recipes WHERE recipename LIKE '%$recpie%' ;";// selects all the data that matches 
+        $query = "SELECT recipeID, recipename, dietaries, links FROM Recipes WHERE recipename LIKE '%$recpie%' OR dietaries IN ('$Qdietaries') OR ingredients IN ('$QIngredients');";// selects all the data that matches 
 
         $statement = $pdo->prepare($query);
 
@@ -187,18 +217,34 @@ else
             <div class="ingrd-container"> <!-- Ingredients cointainer and classes -->
                 <ul class="ingrd-list-container">
                    <li class="ingrd-item">
-                    <button class="add-ingrd-btn"><i class="fa fa-plus"></i> Ingredients</button> <!-- Add and remove buttons -->
-                    <button class="sub-ingrd-btn"><i class="fa fa-minus"></i> Ingredients</button>
+                        <button onclick="optionsingdfunc()" class="add-ingrd-btn"><i class="fa fa-plus"></i> Ingredients</button> <!-- Add and remove buttons -->
+                        <button onclick="optionsingdfunc()" class="sub-ingrd-btn"><i class="fa fa-minus"></i> Ingredients</button>
                     </li>
+
+                    <form method="post" action="index.inc.php" id="optioningred">  <!-- filter the results - dietriary options -->
+                        <input type="checkbox" name="formdingred[]" value="Cheese" />Cheese <br />
+                        <input type="checkbox" name="formdingred[]" value="eggs" />eggs <br />
+                        <input hidden type="text" id="recipe" name="recipe" value= <?php $recpie ?>>
+                        <input type="submit" class="add-ingrd-btn" name="Search" />
+                    </form>
                 </ul>
             </div>
 
             <div class="fltr-container"> <!-- Filters container and classes -->
                 <ul class="fltr-list-container">
                     <li class="fltr-item">
-                        <button class="add-fltr-btn"><i class="fa fa-plus"></i> Filters</button>
-                        <button class="sub-fltr-btn"><i class="fa fa-minus"></i> Filters</button>
+                        <button onclick="optiondietfunc()" class="add-fltr-btn"><i class="fa fa-plus"></i> Filters</button> 
+                        <button onclick="optiondietfunc()" class="sub-fltr-btn"><i class="fa fa-minus"></i> Filters</button>
                     </li>
+                    
+                    <form method="post" action="index.inc.php" id="optiondiet">  <!-- filter the results - dietriary options -->
+                        <input type="checkbox" name="formdiet[]" value="Gluten" />Gluten <br />
+                        <input type="checkbox" name="formdiet[]" value="Vegetrain" />Vegetrain <br />
+                        <input type="checkbox" name="formdiet[]" value="Vegan" />Vegan <br />
+                        <input type="checkbox" name="formdiet[]" value="Nut free" />Nut free<br />
+                        <input hidden type="text" id="recipe" name="recipe" value= <?php $recpie ?>>
+                        <input type="submit" class="add-ingrd-btn" name="Search" />
+                    </form>
                 </ul>
             </div>    
         </section>
@@ -242,6 +288,30 @@ else
         </section>
 
     </section> 
+
+    <script>
+        function optiondietfunc()  // shows or hides filter options
+        {
+            var f_form = document.getElementById("optiondiet");
+
+            if (f_form .style.display === "none") {
+                f_form .style.display = "block";
+            } else {
+                f_form .style.display = "none";
+            }
+        }
+
+        function optionsingdfunc() 
+        {
+            var f_form = document.getElementById("optioningred");
+
+            if (f_form .style.display === "none") {
+                f_form .style.display = "block";
+            } else {
+                f_form .style.display = "none";
+            }
+        }
+        </script>
 
     <section class="footer">
 

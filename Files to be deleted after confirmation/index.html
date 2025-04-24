@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="..\main\styles.css">
     <title>Dishcovery - Home</title>
 </head>
 <body>
@@ -43,18 +43,34 @@
             <div class="ingrd-container"> <!-- Ingredients cointainer and classes -->
                 <ul class="ingrd-list-container">
                    <li class="ingrd-item">
-                        <button class="add-ingrd-btn"><i class="fa fa-plus"></i> Ingredients</button> <!-- Add and remove buttons -->
+                        <button onclick="optionsfunc()" class="add-ingrd-btn"><i class="fa fa-plus"></i> Ingredients</button> <!-- Add and remove buttons -->
                         <button class="sub-ingrd-btn"><i class="fa fa-minus"></i> Ingredients</button>
                     </li>
+
+                    <form method="post" action="index.inc.php" id="optionsform">
+                        <input type="checkbox" name="formdiet[]" value="Gluten" />Gluten <br />
+                        <input type="checkbox" name="formdiet[]" value="Vegetrain" />Vegetrain <br />
+                        <input type="checkbox" name="formdiet[]" value="Vegan" />Vegan <br />
+                        <input type="checkbox" name="formdiet[]" value="Nut free" />Nut free<br />
+                        <input type="submit" class="add-ingrd-btn" name="Search" />
+                    </form>
                 </ul>
             </div>
 
             <div class="fltr-container"> <!-- Filters container and classes -->
                 <ul class="fltr-list-container">
                     <li class="fltr-item">
-                        <button class="add-fltr-btn"><i class="fa fa-plus"></i> Filters</button>
+                        <button onclick="optionsfunc()"class="add-fltr-btn"><i class="fa fa-plus"></i> Filters</button>
                         <button class="sub-fltr-btn"><i class="fa fa-minus"></i> Filters</button>
                     </li>
+                    
+                    <form method="post" action="index.inc.php" id="optiondiet">
+                        <input type="checkbox" name="formdiet[]" value="Gluten" />Gluten <br />
+                        <input type="checkbox" name="formdiet[]" value="Vegetrain" />Vegetrain <br />
+                        <input type="checkbox" name="formdiet[]" value="Vegan" />Vegan <br />
+                        <input type="checkbox" name="formdiet[]" value="Nut free" />Nut free<br />
+                        <input type="submit" class="add-ingrd-btn" name="Search" />
+                    </form>
                 </ul>
             </div>    
         </section>
@@ -76,6 +92,21 @@
         </div> UNSURE IF THIS IS NEEDED YET -->
 
     </section>
+
+    <script>
+
+        function optionsfunc() 
+        {
+            var f_form = document.getElementById("optiondiet");
+
+            if (f_form .style.display === "none") {
+                f_form .style.display = "block";
+            } else {
+                f_form .style.display = "none";
+            }
+        }
+
+    </script>
         
     <section class="footer">
     <!-- <div class="random-recipe"></div> POTENTIAL ADDITION UNCLEAR FOR IMPLEMENTATION -->
