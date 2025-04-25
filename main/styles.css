@@ -303,3 +303,44 @@ header {
     margin: auto;
     max-width: 95%;
 }
+
+input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #527460;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    margin-right: 8px;
+    background-color: white;
+    transition: all 0.2s ease-in-out;
+    vertical-align: middle;
+}
+
+input[type="checkbox"]:hover {
+    box-shadow: 0 0 5px #527460aa;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #527460;
+    border: 2px solid #527460;
+    animation: pop 0.2s ease;
+}
+
+input[type="checkbox"]:checked::after {
+    content: '✔';
+    color: white;
+    position: absolute;
+    font-size: 14px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
