@@ -2,45 +2,54 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-     $recpie = $_POST["recipe"];//replace with form variable
-     $filterchecked = $_POST['formdiet'];
-     $Infilterchecked = $_POST['formdingred'];
+     $recpie = $_POST["recipe"];//replace with form variable 
+     
+     $Qdietaries ="";
+     $QIngredients ="";
+     $switchquery = false;
+
      $admin = false;
 
-     if(empty($filterchecked)) 
+     if (isset($_POST["formdiet"]))
      {
-        $Qdietaries = "";
+        $filterchecked = $_POST["formdiet"];
+        $dietitems = [];
+
+        for($i=0; $i < count($filterchecked); $i++)
+        {
+            $dietitems[] = $filterchecked[$i];
+        }
+        $Qdietaries = implode(", ", $dietitems);
+        $switchquery = true;
      } 
-     else 
-     {
-       $N = count($filterchecked);
 
-       for($i=0; $i < $N; $i++)
-       {
-         $Qdietaries .= $filterchecked[$i];
-       }
-     }
 
-     if(empty($Infilterchecked)) 
+     if (isset($_POST['formdingred']))
      {
-        $QIngredients = "";
+        $Infilterchecked = $_POST['formdingred'];
+        $dietitems = [];
+
+        for($i=0; $i < count($Infilterchecked); $i++)
+        {
+            $dietitems[] = $Infilterchecked[$i];
+        }
+        $QIngredients = implode(", ", $dietitems);
+        $switchquery = true;
      } 
-     else 
-     {
-       $N = count($Infilterchecked);
 
-       for($i=0; $i < $N; $i++)
-       {
-        $QIngredients .= $Infilterchecked[$i];
-       }
-     }
 
     try 
     {
 
         require_once("dbapi.inc.php");//links file connects to the database
-
-        $query = "SELECT recipeID, recipename, dietaries, links FROM Recipes WHERE recipename LIKE '%$recpie%' OR dietaries IN ('$Qdietaries') OR ingredients IN ('$QIngredients');";// selects all the data that matches 
+        if(!$switchquery)
+        {
+            $query = "SELECT recipeID, recipename, dietaries, links FROM Recipes WHERE recipename LIKE '%$recpie%';";// selects all the data that matches 
+        }
+        elseif($switchquery)
+        {
+            $query = "SELECT recipeID, recipename, dietaries, links FROM Recipes WHERE recipename LIKE '%$recpie%' AND (dietaries IN ('$Qdietaries') OR ingredients IN ('$QIngredients'));";// selects all the data that matches 
+        }
 
         $statement = $pdo->prepare($query);
 
@@ -81,7 +90,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     } 
     catch (PDOException $e) 
     {
-        echo $recpie;
         die(" Failed ". $e->getMessage());//it it fails it just terminates the script
         
     }
@@ -221,10 +229,10 @@ else
                         <button onclick="optionsingdfunc()" class="sub-ingrd-btn"><i class="fa fa-minus"></i> Ingredients</button>
                     </li>
 
-                    <form method="post" action="index.inc.php" id="optioningred">  <!-- filter the results - dietriary options -->
+                    <form method="post" action="index.inc.php" >  <!-- filter the results - dietriary options -->
                         <input type="checkbox" name="formdingred[]" value="Cheese" />Cheese <br />
                         <input type="checkbox" name="formdingred[]" value="eggs" />eggs <br />
-                        <input hidden type="text" id="recipe" name="recipe" value= <?php $recpie ?>>
+                        <input hidden type="text" id="recipe" name="recipe" value= <?php if(isset($_POST['recipe'])){echo $recpie;} else{echo "";} ?>>
                         <input type="submit" class="add-ingrd-btn" name="Search" />
                     </form>
                 </ul>
@@ -237,12 +245,12 @@ else
                         <button onclick="optiondietfunc()" class="sub-fltr-btn"><i class="fa fa-minus"></i> Filters</button>
                     </li>
                     
-                    <form method="post" action="index.inc.php" id="optiondiet">  <!-- filter the results - dietriary options -->
-                        <input type="checkbox" name="formdiet[]" value="Gluten" />Gluten <br />
-                        <input type="checkbox" name="formdiet[]" value="Vegetrain" />Vegetrain <br />
+                    <form method="post" action="index.inc.php" >  <!-- filter the results - dietriary options -->
+                        <input type="checkbox" name="formdiet[]" value="Gluten-free" />Gluten <br />
+                        <input type="checkbox" name="formdiet[]" value="Vegetarian" />Vegetarian <br />
                         <input type="checkbox" name="formdiet[]" value="Vegan" />Vegan <br />
-                        <input type="checkbox" name="formdiet[]" value="Nut free" />Nut free<br />
-                        <input hidden type="text" id="recipe" name="recipe" value= <?php $recpie ?>>
+                        <input type="checkbox" name="formdiet[]" value="Nut-free" />Nut-free<br />
+                        <input hidden type="text" id="recipe" name="recipe" value= <?php if(isset($_POST['recipe'])){echo $recpie;} else{echo "";} ?>>
                         <input type="submit" class="add-ingrd-btn" name="Search" />
                     </form>
                 </ul>
