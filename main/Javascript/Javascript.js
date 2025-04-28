@@ -38,6 +38,34 @@ document.getElementById("addRecipeButton").addEventListener("click", function ()
     });
 });
 
+//handle accounts
+document.getElementById('signupButton').addEventListener('click', function(event) {
+    event.preventDefault(); // stop the page from reloading
+ 
+    const account = {
+        username: document.getElementById('username').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        firstname: document.getElementById('firstname').value,
+        secondname: document.getElementById('secondname').value,
+        age: document.getElementById('age').value
+    };
+ 
+    fetch('/register-account', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(account)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert("Account registered successfully!");
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
 const mysql = require('mysql');//security flaw I dont think it needs this code plus not on sever can be seen
 
 const db = mysql.createConnection({
