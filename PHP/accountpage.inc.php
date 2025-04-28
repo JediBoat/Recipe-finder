@@ -96,10 +96,10 @@ else if(file_exists("currentaccount.json"))
         $json_data = file_get_contents("currentaccount.json");
         $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
 
-        $name = $useraccount["Username"];
+        $email = $useraccount["Email"];
         $id = $useraccount["AccountID"];
 
-        $adminquery = "SELECT * FROM Admins WHERE username = '$name' AND acountID = '$id';";// selects all the data that matches 
+        $adminquery = "SELECT * FROM Admins WHERE email = '$email' AND acountID = '$id';";// selects all the data that matches 
 
         $adstatement = $pdo->prepare($adminquery);
 
@@ -214,27 +214,19 @@ else
                 <p id="phone" class="info-text"></p>
             </div>
 
-            <div class="input-group">
-                <input type="email" id="email" name="email" class="input-field" placeholder="Email" required>
-            </div>
-            <div class="input-group">
-                <input type="password" id="pwd" class="input-field" placeholder="Password" required>
-            </div>
             <button type="submit" id="logoutbtn" class="logoutbtn" ><a href="../PHP/filedelete.inc.php"> Logout </a></button>
             <p class="delete-link">Want to delete your account?<a href="../main/delaccountpage.html"> Click here</a></p>
         </form>
 
-        <form class="account-form" id="accountForm" method="post" action="accountupdate.inc.php">
+        <form class="account-form" method="post" action="accountupdate.inc.php">
             <h2 class="account-title">Update Account Info</h2>
         
             <div class="info-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" class="input-field" placeholder="Enter new username" required>
+                <input type="text" name="username" class="input-field" placeholder="Enter new username" required>
             </div>
         
             <div class="info-group">
-                <label for="new-password">New Password:</label>
-                <input type="password" id="new-password" class="input-field" placeholder="Enter new password" required>
+                <input type="password" name="new-password" class="input-field" placeholder="Enter new password" required>
             </div>
         
             <button type="submit" class="updatebtn">Update</button>

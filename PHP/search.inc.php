@@ -1,4 +1,4 @@
-Register<?php
+<?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -27,9 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         {
             $json_data = file_get_contents("currentaccount.json");
             $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
-            $name = $useraccount["Username"];
+            $email = $useraccount["Email"];
             $id = $useraccount["AccountID"];
-            $adminquery = "SELECT * FROM Admins WHERE username = '$name' AND acountID = '$id';";// selects all the data that matches 
+    
+            $adminquery = "SELECT * FROM Admins WHERE email = '$email' AND acountID = '$id';";// selects all the data that matches 
             $adstatement = $pdo->prepare($adminquery);
             $adstatement->execute();//submit data from user
             $adresults = $adstatement->fetchAll(PDO::FETCH_ASSOC);//gets the reults
@@ -51,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     } 
     catch (PDOException $e) 
     {
-        echo $recpie;
         die(" Failed ". $e->getMessage());//it it fails it just terminates the script
         
     }
@@ -66,10 +66,10 @@ else if(file_exists("currentaccount.json"))
 
         $useraccount = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
 
-        $name = $useraccount["Username"];
+        $email = $useraccount["Email"];
         $id = $useraccount["AccountID"];
 
-        $adminquery = "SELECT * FROM Admins WHERE username = '$name' AND acountID = '$id';";// selects all the data that matches 
+        $adminquery = "SELECT * FROM Admins WHERE email = '$email' AND acountID = '$id';";// selects all the data that matches 
 
         $adstatement = $pdo->prepare($adminquery);
 
