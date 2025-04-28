@@ -77,7 +77,7 @@ app.post('/register-account', (req, res) => {
     const { username, email, password, firstname, secondname, age } = req.body;
  
     const sql = `
-        INSERT INTO Accounts (username, email, password, firstname, secondname, age)
+        INSERT INTO Accounts (username, email, pwd, firstname, secondname, age)
         VALUES (?, ?, ?, ?, ?, ?)
     `;
  
@@ -97,4 +97,3 @@ app.post('/register-account', (req, res) => {
 app.listen(7000, () => {
     console.log('Server running at http://localhost:7000');
 });
- 

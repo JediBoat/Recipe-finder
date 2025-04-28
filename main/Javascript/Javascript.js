@@ -1,17 +1,17 @@
 let ingredientArray = []; // to store multiple ingredients
-
-function addIngredient() { 
+ 
+function addIngredient() {
     const name = document.getElementById('ingredientName').value;
     const quantity = document.getElementById('ingredientQuantity').value;
     const type = document.getElementById('ingredientType').value;
-
+ 
     ingredientArray.push({ name, quantity, type });
-
-    const li = document.createElement('li'); 
+ 
+    const li = document.createElement('li');
     li.textContent = `${quantity} ${type} of ${name}`;
     document.getElementById('ingredientList').appendChild(li);
 }
-
+ 
 // create a json object of required fields
 // sends post request to server add recipe where it will send to the database
 document.getElementById("addRecipeButton").addEventListener("click", function () {
@@ -22,7 +22,7 @@ document.getElementById("addRecipeButton").addEventListener("click", function ()
         RecipeDietaries: document.getElementById('recipeDietariesBox').value,
         RecipeLinks: document.getElementById('recipeLinksBox').value
     };
-
+ 
     fetch('/add-recipe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -37,10 +37,10 @@ document.getElementById("addRecipeButton").addEventListener("click", function ()
         console.error('Error:', error);
     });
 });
-
+ 
 //handle accounts
-document.getElementById('signupButton').addEventListener('click', function(event) {
-    event.preventDefault(); // stop the page from reloading
+
+document.getElementById('accountButton').addEventListener('click', function() {
  
     const account = {
         username: document.getElementById('username').value,
@@ -67,14 +67,14 @@ document.getElementById('signupButton').addEventListener('click', function(event
 });
 
 const mysql = require('mysql');//security flaw I dont think it needs this code plus not on sever can be seen
-
+ 
 const db = mysql.createConnection({
     host: 'sql8.freesqldatabase.com',
     user: 'sql8768869',
     password: 'jICFgdSB17',
     database: 'DishcoveryDatabase'
 });
-
+ 
 // error handling for database connection
 db.connect((err) => {
     if (err) {
